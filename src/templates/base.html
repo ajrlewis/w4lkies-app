@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}{% endblock head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example.com</title>
+    <link rel="canonical" href="https://example.com"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content="https://example.com/static/img/logo.png"/>
+    <meta property="og:image:width" content="2500"/>
+    <meta property="og:image:height" content="1330"/>
+    <meta property="og:image:type" content="image/png"/>
+    <meta property="og:url" content="https://example.com"/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:type" content="website"/>
+    <link rel="apple-touch-icon" href="/static/img/logo.png"/>
+    <meta name="apple-mobile-web-app-title" content=""/>
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <link rel="stylesheet" href="/static/css/vendor/Skeleton-2.0.4/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/vendor/Skeleton-2.0.4/css/skeleton.css">
+    <link rel="stylesheet" href="/static/css/stylesheet.css">
+    <link rel="stylesheet" href="/static/css/skeleton.css">
+  </head>
+  <body>
+    <header>
+      {% block header %}{% endblock header %}
+    </header>
+    <nav>
+      {% block nav %}{% endblock nav %}
+    </nav>
+    <main>
+      {% block main %}{% endblock main %}
+    </main>
+    <footer>
+      {% block footer %}{% endblock footer %}
+    </footer>
+    <script type="text/javascript" src="/static/js/vendor/htmx.org@2.0.4/dist/htmx.min.js" defer></script>
+    {% block scripts %}{% endblock scripts %}
+    <noscript>
+      <p>JavaScript is required for this site to function properly.</p>
+    </noscript>
+  </body>
+</html>

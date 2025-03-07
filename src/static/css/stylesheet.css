@@ -1,0 +1,12 @@
+:root {
+  --primary-color: #3498db; /* Main theme color */
+  --secondary-color: #f1c40f; /* Secondary theme color */
+  --background-color: #f9f9f9; /* Background color */
+  --text-color: #333; /* Main text color */
+  --accent-color: #e74c3c; /* Accent color for highlights or warnings */
+  --success-color: #2ecc71; /* Color for success messages */
+  --error-color: #e74c3c; /* Color for error messages */
+  --warning-color: #f7dc6f; /* Color for warning messages */
+  --dark-background: #333; /* Dark background for overlays or menus */
+  --light-text: #fff; /* Light text color for contrast */
+}

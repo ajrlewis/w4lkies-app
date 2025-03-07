@@ -1,0 +1,15 @@
+{
+    "env": {
+        "PYTHONPATH": "src/"
+    },
+    "rewrites": [{
+        "source": "/(.*)",
+        "destination": "/api/wsgi"
+    }],
+    "functions": {
+        "api/wsgi.py": {
+            "maxDuration": 30
+        }
+    },
+    "buildCommand": "bash scripts/install.sh;"
+}
