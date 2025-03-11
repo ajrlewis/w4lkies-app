@@ -1,12 +1,40 @@
 :root {
   --primary-color: #3498db; /* Main theme color */
   --secondary-color: #f1c40f; /* Secondary theme color */
+
   --background-color: #f9f9f9; /* Background color */
+  --background-dark-color: #333; /* Dark background for overlays or menus */
+
   --text-color: #333; /* Main text color */
-  --accent-color: #e74c3c; /* Accent color for highlights or warnings */
-  --success-color: #2ecc71; /* Color for success messages */
+  --text-light-color: #fff; /* Light text color for contrast */
+
+  --success-color: #2ecc71; /* Color for positive actions */
+  --success-dark-color: #29b866; /* darker shade of --success-color */
+
   --error-color: #e74c3c; /* Color for error messages */
   --warning-color: #f7dc6f; /* Color for warning messages */
-  --dark-background: #333; /* Dark background for overlays or menus */
-  --light-text: #fff; /* Light text color for contrast */
+
+  --danger-color: #e74c3c; /* Color for destructive actions */
+  --danger-dark-color: #c0392b; /* darker shade of --danger-color */
+
+}
+
+.button-edit {
+  background-color: var(--success-color);
+  color: var(--text-light-color);
+}
+
+.button-edit:hover {
+  background-color: var(--success-dark-color);
+  color: var(--text-light-color);
+}
+
+.button-delete {
+  background-color: var(--danger-color);
+  color: var(--text-light-color);
+}
+
+.button-delete:hover {
+  background-color: var(--danger-dark-color);
+  color: var(--text-light-color);
 }
