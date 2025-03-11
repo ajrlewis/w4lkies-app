@@ -4,22 +4,22 @@
     {% block head %}{% endblock head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example.com</title>
-    <link rel="canonical" href="https://example.com"/>
-    <meta name="description" content=""/>
+    <title>W4lkies | App</title>
+    <link rel="canonical" href="https://app.w4lkies.com"/>
+    <meta name="description" content="Application for w4lkies"/>
     <meta name="keywords" content=""/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:title" content=""/>
     <meta property="og:description" content=""/>
-    <meta property="og:image" content="https://example.com/static/img/logo.png"/>
+    <meta property="og:image" content="https://app.w4lkies.com/static/img/logo.png"/>
     <meta property="og:image:width" content="2500"/>
     <meta property="og:image:height" content="1330"/>
     <meta property="og:image:type" content="image/png"/>
-    <meta property="og:url" content="https://example.com"/>
+    <meta property="og:url" content="https://app.w4lkies.com"/>
     <meta property="og:site_name" content=""/>
     <meta property="og:type" content="website"/>
     <link rel="apple-touch-icon" href="/static/img/logo.png"/>
-    <meta name="apple-mobile-web-app-title" content=""/>
+    <meta name="apple-mobile-web-app-title" content="W4lkies App"/>
     <link rel="shortcut icon" href="/static/img/favicon.ico">
     <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0" />
     <meta http-equiv="expires" content="0" />
@@ -32,10 +32,10 @@
   <body>
     <header>
       {% block header %}{% endblock header %}
+      <nav>
+        {% block nav %}{% endblock nav %}
+      </nav>
     </header>
-    <nav>
-      {% block nav %}{% endblock nav %}
-    </nav>
     <main>
       {% block main %}{% endblock main %}
     </main>
@@ -44,6 +44,7 @@
     </footer>
     <script type="text/javascript" src="/static/js/vendor/htmx.org@2.0.4/dist/htmx.min.js" defer></script>
     {% block scripts %}{% endblock scripts %}
+    <script type="text/javascript" src="/static/js/scripts.js" defer></script>
     <noscript>
       <p>JavaScript is required for this site to function properly.</p>
     </noscript>

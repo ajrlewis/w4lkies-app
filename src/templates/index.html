@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 
-{% block main %}
+{% block header %}
 <div class="container">
-  <h1>Flask Vercel Template</h1>
+  <a href="/">
+    <img src="/static/img/logo.png" alt="w4lkies logo" style="max-width: 100px; height: auto;">
+  </a>
+  <h1>W4lkies App</h1>
+  <p>Management Dashboard</p>
 </div>
-{% endblock main %}
+{% endblock header %}
 
+{% block nav %}
+<div class="container">
+  <ul>
+    <li><a hx-get="/expenses/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/expenses" href="#" hx-trigger="click">Expenses</a></li>
+  </ul>
+</div>
+{% endblock nav %}
+
+{% block main %}
+<div id="root"></div>
+{% endblock main %}
