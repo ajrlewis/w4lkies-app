@@ -12,5 +12,5 @@ fi
 
 #
 message=${1}
-flask --app api/wsgi.py db migrate -m \""${message}"\"
-flask --app api/wsgi.py db upgrade
+python3 -m flask --app api/wsgi.py db migrate -m \""${message}"\"
+python3 -m flask --app api/wsgi.py db upgrade
