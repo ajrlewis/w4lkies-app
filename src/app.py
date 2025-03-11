@@ -1,8 +1,13 @@
 import os
 import sys
 
-from loguru import logger
 from flask import Flask
+from flask_login import LoginManager
+from flask_mail import Mail
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
+from loguru import logger
 
 # Configure logging
 LOGURU_LEVEL = os.getenv("LOGURU_LEVEL", "INFO")
@@ -10,6 +15,12 @@ LOGURU_LEVEL = LOGURU_LEVEL.upper()
 logger.remove()
 logger.add(sys.stderr, level=LOGURU_LEVEL)
 logger.info(f"{LOGURU_LEVEL = }")
+
+csrf = CSRFProtect()
+db = SQLAlchemy()
+login_manager = LoginManager()
+migrate = Migrate()
+mail = Mail()
 
 
 # Create application
@@ -19,9 +30,53 @@ def create_app(Config) -> Flask:
     # Configure application
     app.config.from_object(Config)
 
+    csrf.init_app(app=app)
+    db.init_app(app=app)
+    migrate.init_app(app, db)
+    # login_manager.init_app(app=app)
+    mail.state = mail.init_app(app=app)
+
     with app.app_context():
+        #
+        # login_manager.login_view = "auth_bp.sign_in"
+        # login_manager.login_message_category = "error"
+
+        #
+        import models
+
+        #
         from blueprints.index_bp import index_bp
+        from blueprints.auth_bp import auth_bp
+        from blueprints.expenses_bp import expenses_bp
 
         app.register_blueprint(index_bp, url_prefix="/")
+        app.register_blueprint(auth_bp, url_prefix="/auth")
+        app.register_blueprint(expenses_bp, url_prefix="/expenses")
+
+        # Request Handling
+
+        @app.before_request
+        def before_request_func():
+            # Code to run before each request
+            pass
+
+        @app.after_request
+        def after_request_func(response):
+            # Code to modify the response
+            return response
+
+        @app.teardown_request
+        def teardown_request_func(exception):
+            # Code to run after the request
+            pass
+
+        # Error Handling
+        @app.errorhandler(404)
+        def page_not_found(e):
+            return "Page not found", 404
+
+        @app.errorhandler(500)
+        def internal_server_error(e):
+            return "Internal server error", 500
 
         return app
