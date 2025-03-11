@@ -43,4 +43,4 @@ echo ">> Installing requirements."
 pip3 install -r requirements.txt;
 
 # Database migrations
-# ...
+bash scripts/migrate.sh "migration"
