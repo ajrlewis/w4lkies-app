@@ -1,0 +1,19 @@
+<table class="table u-full-width">
+  <caption>
+    Showing {{ expenses | length }} expenses.
+  </caption>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for expense in expenses %}
+      {% include "expense_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

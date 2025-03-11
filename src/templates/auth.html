@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+
+{% block nav %}
+{% endblock nav %}
+
+{% block main %}
+<div class="container"> 
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <h1>Sign In</h1>
+    </div>
+  </div>
+  <form action="{{ url_for('auth_bp.sign_in') }}" method="POST" >
+    {{ auth_form.csrf_token }}
+    <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
+    <div class="row">
+      <div class="twelve columns">
+        {{ auth_form.email.label() }}
+        {{ auth_form.email(class_="u-full-width") }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        {{ auth_form.password.label() }}
+        {{ auth_form.password(class_="u-full-width") }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        <button type="submit">Sign In</button>
+      </div>
+    </div>
+  </form>
+  <br>
+</div>
+{% endblock main %}

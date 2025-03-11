@@ -1,0 +1,66 @@
+<tr id="expense-{{ expense.id }}">
+  <form
+    hx-put="/expenses/{{ expense.id }}"
+    hx-target="#expense-{{ expense.id }}"
+    hx-swap="outerHTML swap:100ms">
+    {{ expense_form.csrf_token }}
+    <td>
+      {{ expense_form.name }}
+      {% with errors=expense_form.name.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      {{ expense_form.phone }}
+      {% with errors=expense_form.phone.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      {{ expense_form.email }}
+      {% with errors=expense_form.email.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      {{ expense_form.emergency_contact_name }}
+      {% with errors=expense_form.emergency_contact_name.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      {{ expense_form.emergency_contact_phone }}
+      {% with errors=expense_form.emergency_contact_phone.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      {{ expense_form.signed_up_on }}
+      {% with errors=expense_form.signed_up_on.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      {{ expense_form.is_active }}
+      {% with errors=expense_form.is_active.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </td>
+    <td>
+      <button 
+        type="submit"
+        class="button button-update u-half-width">
+        Update
+      </button>
+      <button
+        type="button"
+        class="button button-cancel"
+        hx-target="#expense-{{ expense.id }}"
+        hx-swap="outerHTML swap:100ms"
+        hx-get="/expenses/{{ expense.id }}">
+        Cancel
+      </button>
+    </td>
+  </form>
+</tr>
+

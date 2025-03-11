@@ -1,0 +1,32 @@
+<form id="expense-filter-form"
+  hx-get="/expenses"
+  hx-target="#expenses"
+  hx-trigger="change"
+  hx-swap="innerHTML">
+  <div class="row">
+    <div class="four columns">
+      {{ expense_filter_form.from_date.label() }}
+      {{ expense_filter_form.from_date(class_="u-full-width") }}
+    </div>
+    <div class="four columns">
+      {{ expense_filter_form.to_date.label() }}
+      {{ expense_filter_form.to_date(class_="u-full-width") }}
+    </div>
+    <div class="four columns">
+      {{ expense_filter_form.category.label() }}
+      {{ expense_filter_form.category(class_="u-full-width") }}
+    </div>
+  </div>
+</form>
+
+<button class="button button-primary" onclick="exportTableToCsv('Expenses')">Download as CSV</button>
+
+<br>
+<br>
+<br>
+
+<div id="expenses">
+  {% with expenses=expenses %}
+    {% include "expenses.html" %}
+  {% endwith %}
+</div>

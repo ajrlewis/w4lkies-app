@@ -1,0 +1,47 @@
+<form id="expense-form" hx-post="/expenses/" hx-swap="outerHTML">
+  {{ expense_form.csrf_token }}
+  <div class="row">
+    <div class="six columns">
+      {{ expense_form.date.label() }}
+      {{ expense_form.date(class_="u-full-width") }}
+      {% with errors=expense_form.date.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {{ expense_form.category.label() }}
+      {{ expense_form.category(class_="u-full-width") }}
+      {% with errors=expense_form.category.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="four columns">
+      {{ expense_form.price.label() }}
+      {{ expense_form.price(class_="u-full-width") }}
+      {% with errors=expense_form.price.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </div>
+    <div class="eight columns">
+      {{ expense_form.description.label() }}
+      {{ expense_form.description(class_="u-full-width") }}
+      {% with errors=expense_form.description.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </div>
+  </div>
+    <br>
+    <br>
+    <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button 
+        type="submit"
+        class="button button-primary u-half-width">
+        Add Expense
+      </button>
+    </div>
+  </div>
+</form>
