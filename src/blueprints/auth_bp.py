@@ -22,6 +22,7 @@ def base():
 
 @auth_bp.route("/sign-in", methods=["POST"])
 def sign_in():
+    logger.debug("here")
     auth_form = auth_service.get_auth_form()
     logger.debug(f"{auth_form.data = }")
     if auth_form.validate_on_submit():

@@ -23,7 +23,7 @@ logger.add(sys.stderr, level=LOGURU_LEVEL)
 logger.info(f"{LOGURU_LEVEL = }")
 
 # cors = CORS()
-# csrf = CSRFProtect()
+csrf = CSRFProtect()
 db = SQLAlchemy()
 login_manager = LoginManager()
 migrate = Migrate()
@@ -38,7 +38,7 @@ def create_app(Config) -> Flask:
     app.config.from_object(Config)
 
     # cors.init_app(app=app, resources={r"/*": {"origins": "*"}})
-    # csrf.init_app(app=app)
+    csrf.init_app(app=app)
     db.init_app(app=app)
     migrate.init_app(app, db)
     login_manager.init_app(app=app)
