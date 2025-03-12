@@ -6,7 +6,9 @@
     <img src="/static/img/logo.png" alt="w4lkies logo" style="max-width: 100px; height: auto;">
   </a>
   <h1>W4lkies App</h1>
-  <p>Welcome <b>{{ current_user.name }}!</b></p>
+  {% if current_user.is_authenticated %}
+    <p>Welcome <b>{{ current_user.name }}!</b></p>
+  {% endif %}
 </div>
 {% endblock header %}
 

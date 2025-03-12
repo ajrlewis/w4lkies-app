@@ -6,10 +6,6 @@ from loguru import logger
 
 from services import auth_service
 
-
-from models.user import User
-from services import user_service
-
 auth_bp = Blueprint("auth_bp", __name__)
 
 
@@ -22,19 +18,17 @@ def base():
 
 @auth_bp.route("/sign-in", methods=["POST"])
 def sign_in():
-    logger.debug("here")
     auth_form = auth_service.get_auth_form()
     logger.debug(f"{auth_form.data = }")
     if auth_form.validate_on_submit():
         email = auth_form.email.data
         password = auth_form.password.data
-        logger.debug(f"{email = } {password = }")
 
         user = auth_service.sign_in_user(email, password)
         if not user:
             logger.error("User does not exist or password is incorrect")
-            auth_form.email.errors = ["too bad!"]
-            auth_form.password.errors = ["too bad again!"]
+            auth_form.email.errors = ["Email does not exist"]
+            # auth_form.password.errors = ["Password not correct"]
             logger.debug(f"{auth_form.errors = }")
             return render_template("auth_form.html", auth_form=auth_form), 422
 

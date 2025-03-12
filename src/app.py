@@ -2,18 +2,14 @@ import os
 import sys
 
 from flask import Flask, request
-
-# from flask_cors import CORS
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-
-# from flask_wtf.csrf import CSRFProtect
 from flask_wtf import CSRFProtect
 from loguru import logger
 
-from middleware.htmx_error import htmx_error
+from middleware.htmx import handle_htmx_redirect
 
 # Configure logging
 LOGURU_LEVEL = os.getenv("LOGURU_LEVEL", "INFO")
@@ -22,7 +18,6 @@ logger.remove()
 logger.add(sys.stderr, level=LOGURU_LEVEL)
 logger.info(f"{LOGURU_LEVEL = }")
 
-# cors = CORS()
 csrf = CSRFProtect()
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -37,7 +32,6 @@ def create_app(Config) -> Flask:
     # Configure application
     app.config.from_object(Config)
 
-    # cors.init_app(app=app, resources={r"/*": {"origins": "*"}})
     csrf.init_app(app=app)
     db.init_app(app=app)
     migrate.init_app(app, db)
@@ -60,24 +54,12 @@ def create_app(Config) -> Flask:
         # Request Handling
         @app.before_request
         def before_request_func():
-            logger.info(f"Request Method: {request.method}")
-            logger.info(f"Request URL: {request.url}")
-            logger.info(f"Request Headers: {request.headers}")
-            logger.info(f"Request Data (args): {request.args}")
-            logger.info(f"Request Data (form): {request.form}")
-            # logger.info(f"Request Data (json): {request.get_json()}")
-            logger.info(f"Request Data (files): {request.files}")
+            pass
 
         @app.after_request
         def after_request_func(response):
-            # Code to modify the response
-            response = htmx_error(response)
+            response = handle_htmx_redirect(response)
             return response
-
-        @app.teardown_request
-        def teardown_request_func(exception):
-            # Code to run after the request
-            pass
 
         # Error Handling
         @app.errorhandler(404)
