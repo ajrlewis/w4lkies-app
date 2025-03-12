@@ -1,5 +1,5 @@
 <form id="auth-form" hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML 100ms">
-  {{ auth_form.csrf_token }}
+  <!-- { auth_form.csrf_token }} -->
   <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
   <div class="row">
     <div class="twelve columns">
