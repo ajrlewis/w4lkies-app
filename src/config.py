@@ -33,4 +33,3 @@ class Config:
 
     # Security settings
     SECRET_KEY = os.getenv("SECRET_KEY") or secrets.token_urlsafe(32)
-    logger.debug(f"{SECRET_KEY = }")
