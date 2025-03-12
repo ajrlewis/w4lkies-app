@@ -7,6 +7,8 @@ fi
 
 # 
 if [ ! -d migrations ]; then
+  pwd
+  ls
   python3 -m flask --app api/wsgi.py db init
 fi
 
