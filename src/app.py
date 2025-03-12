@@ -2,6 +2,7 @@ import os
 import sys
 
 from flask import Flask
+from flask_cors import CORS
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
@@ -18,6 +19,7 @@ logger.remove()
 logger.add(sys.stderr, level=LOGURU_LEVEL)
 logger.info(f"{LOGURU_LEVEL = }")
 
+cors = CORS()
 csrf = CSRFProtect()
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -32,6 +34,7 @@ def create_app(Config) -> Flask:
     # Configure application
     app.config.from_object(Config)
 
+    cors.init_app(app=app, resources={r"/*": {"origins": "*"}})
     csrf.init_app(app=app)
     db.init_app(app=app)
     migrate.init_app(app, db)
