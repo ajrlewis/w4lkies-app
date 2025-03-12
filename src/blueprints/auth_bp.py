@@ -38,12 +38,12 @@ def sign_in():
             return render_template("auth_form.html", auth_form=auth_form), 422
 
         # next_page = request.form.get("next")
-        next_page = ""
-        if next_page:
-            logger.debug(f"Redirecting to {next_page = }")
-            return redirect(next_page)
-        else:
-            return redirect(url_for("index_bp.get"))
+        # if next_page:
+        #     logger.debug(f"Redirecting to {next_page = }")
+        #     return redirect(next_page)
+        # else:
+        #     return redirect(url_for("index_bp.get"))
+        return redirect(url_for("index_bp.get"))
     else:
         logger.error(f"Sign-in form did not validate: {auth_form.errors}")
         return render_template("auth_form.html", auth_form=auth_form), 422
