@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/static/css/stylesheet.css">
     <link rel="stylesheet" href="/static/css/skeleton.css">
   </head>
-  <body>
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}'>
     <header>
       {% block header %}{% endblock header %}
       <nav>

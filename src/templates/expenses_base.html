@@ -1,23 +1,21 @@
 <div class="container">
-
-  <div class="model-header">
-    <h1>Expenses</h1>
+  <h1>Expenses</h1>
+  <br>
+  <div class="row">
+    <div class="six columns">
+      <button class="button button-primary u-full-width" hx-get="/expenses/add" hx-target="#expenses-container">
+        Add Expense
+      </button>
+    </div>
+    <div class="six columns">
+      <button class="button button-primary u-full-width" hx-get="/expenses/info" hx-target="#expenses-container">
+        Expense Info
+      </button>
   </div>
-
-  <br>
-
-  <div class="model-options">
-    <button class="button button-primary" hx-get="/expenses/add" hx-target="#expenses-container">
-      Add Expense
-    </button>
-    <button class="button button-primary" hx-get="/expenses/info" hx-target="#expenses-container">
-      Expense Info
-    </button>
-  </div>
-
   <br>
   <br>
-
   <div id="expenses-container"></div>
-
+  <br>
+  <br>
+  <br>
 </div>

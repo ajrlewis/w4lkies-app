@@ -4,7 +4,7 @@ from flask import request, Response
 from loguru import logger
 
 
-def htmx_middleware(response: Response) -> Response:
+def htmx_error(response: Response) -> Response:
     hx_request = request.headers.get("HX-Request")
     status_code = response.status_code
     if hx_request == "true" and status_code == 302:

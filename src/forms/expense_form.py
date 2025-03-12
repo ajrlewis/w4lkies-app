@@ -15,10 +15,12 @@ class ExpenseForm(FlaskForm):
         default=datetime.date.today(),
     )
     category = SelectField("Category", validators=[Optional()])
-    price = DecimalField("Price", validators=[DataRequired()])
+    price = DecimalField(
+        "Price",
+        validators=[DataRequired(message="Enter a valid price.")],
+    )
     description = StringField("Description", validators=[Optional()])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        category_choices = expense_service.get_expense_categories()
-        self.category.choices = category_choices
+        self.category.choices = expense_service.get_expense_categories()

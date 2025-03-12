@@ -9,6 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from loguru import logger
 
+from middleware.htmx_error import htmx_error
+
 # Configure logging
 LOGURU_LEVEL = os.getenv("LOGURU_LEVEL", "INFO")
 LOGURU_LEVEL = LOGURU_LEVEL.upper()
@@ -33,18 +35,14 @@ def create_app(Config) -> Flask:
     csrf.init_app(app=app)
     db.init_app(app=app)
     migrate.init_app(app, db)
-    # login_manager.init_app(app=app)
+    login_manager.init_app(app=app)
     mail.state = mail.init_app(app=app)
 
     with app.app_context():
-        #
-        # login_manager.login_view = "auth_bp.sign_in"
-        # login_manager.login_message_category = "error"
-
-        #
+        # Import all models for database initialization and migrations.
         import models
 
-        #
+        # Register application routes.
         from blueprints.index_bp import index_bp
         from blueprints.auth_bp import auth_bp
         from blueprints.expenses_bp import expenses_bp
@@ -54,7 +52,6 @@ def create_app(Config) -> Flask:
         app.register_blueprint(expenses_bp, url_prefix="/expenses")
 
         # Request Handling
-
         @app.before_request
         def before_request_func():
             # Code to run before each request
@@ -63,6 +60,7 @@ def create_app(Config) -> Flask:
         @app.after_request
         def after_request_func(response):
             # Code to modify the response
+            response = htmx_error(response)
             return response
 
         @app.teardown_request

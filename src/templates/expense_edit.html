@@ -1,66 +1,34 @@
-<tr id="expense-{{ expense.id }}">
-  <form
-    hx-put="/expenses/{{ expense.id }}"
-    hx-target="#expense-{{ expense.id }}"
-    hx-swap="outerHTML swap:100ms">
-    {{ expense_form.csrf_token }}
+<tr hx-trigger="cancel" class="editing" hx-get="/expenses/{{ expense.expense_id }}">
     <td>
-      {{ expense_form.name }}
-      {% with errors=expense_form.name.errors %}
+      {{ expense_form.date(class_="u-full-width") }}
+      {% with errors=expense_form.date.errors %}
         {% include "form_errors.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.phone }}
-      {% with errors=expense_form.phone.errors %}
+      {{ expense_form.category(class_="u-full-width") }}
+      {% with errors=expense_form.category.errors %}
         {% include "form_errors.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.email }}
-      {% with errors=expense_form.email.errors %}
+      {{ expense_form.price(class_="u-full-width") }}
+      {% with errors=expense_form.price.errors %}
         {% include "form_errors.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.emergency_contact_name }}
-      {% with errors=expense_form.emergency_contact_name.errors %}
+      {{ expense_form.description(class_="u-full-width") }}
+      {% with errors=expense_form.description.errors %}
         {% include "form_errors.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.emergency_contact_phone }}
-      {% with errors=expense_form.emergency_contact_phone.errors %}
-        {% include "form_errors.html" %}
-      {% endwith %}
+    <button class="button-edit u-full-width" hx-put="/expenses/{{ expense.expense_id }}" hx-include="closest tr">
+      Save
+    </button>
+    <button class="button-delete u-full-width" hx-get="/expenses/{{ expense.expense_id }}">
+      Cancel
+    </button>
     </td>
-    <td>
-      {{ expense_form.signed_up_on }}
-      {% with errors=expense_form.signed_up_on.errors %}
-        {% include "form_errors.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {{ expense_form.is_active }}
-      {% with errors=expense_form.is_active.errors %}
-        {% include "form_errors.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      <button 
-        type="submit"
-        class="button button-update u-half-width">
-        Update
-      </button>
-      <button
-        type="button"
-        class="button button-cancel"
-        hx-target="#expense-{{ expense.id }}"
-        hx-swap="outerHTML swap:100ms"
-        hx-get="/expenses/{{ expense.id }}">
-        Cancel
-      </button>
-    </td>
-  </form>
 </tr>
-

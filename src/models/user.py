@@ -16,3 +16,6 @@ class User(UserMixin, db.Model):
     created_by = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=True)
     updated_at = db.Column(db.DateTime, nullable=True)
     updated_by = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=True)
+
+    def get_id(self):
+        return self.user_id

@@ -1,8 +1,7 @@
 // Toggles the checked class in the checkbox
 function toggleCheckbox(checkbox) {
-  console.log("toggleCheckbox");
-  checkbox.classList.toggle("checked");
-  var input = checkbox.querySelector("input[type='checkbox']");
+  checkbox.classList.toggle('checked');
+  var input = checkbox.querySelector('input[type="checkbox"]');
   input.checked = !input.checked;
 }
 
@@ -34,3 +33,20 @@ function exportTableToCsv(tableName = 'table') {
   link.setAttribute('download', `${tableName}.csv`);
   link.click();
 }
+
+// Catch HTMX form errors
+document.body.addEventListener('htmx:beforeOnLoad', function(evt) {
+  if (evt.detail.xhr.status === 422) {
+    evt.detail.shouldSwap = true;
+    evt.detail.isError = false;
+  }
+});
+
+// Check the user is signed in.
+fetch('/auth/authenticated')
+  .then(response => response.json())
+  .then(data => {
+    if (!data.authenticated && window.location.pathname !== '/auth/') {
+      window.location.href = '/auth/';
+    }
+  });

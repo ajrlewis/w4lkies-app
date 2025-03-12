@@ -1,0 +1,27 @@
+<form id="auth-form" hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML 100ms">
+  {{ auth_form.csrf_token }}
+  <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
+  <div class="row">
+    <div class="twelve columns">
+      {{ auth_form.email.label() }}
+      {{ auth_form.email(class_="u-full-width") }}
+      {% with errors=auth_form.email.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="twelve columns">
+      {{ auth_form.password.label() }}
+      {{ auth_form.password(class_="u-full-width") }}
+      {% with errors=auth_form.password.errors %}
+        {% include "form_errors.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button-edit u-full-width" type="submit">Sign In</button>
+    </div>
+  </div>
+</form>

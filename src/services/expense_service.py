@@ -3,6 +3,7 @@ import datetime
 from typing import Optional
 
 from loguru import logger
+from flask_login import current_user
 from sqlalchemy import asc, desc, func
 
 from app import db
@@ -15,11 +16,15 @@ def get_expense_form(
     expense: Optional[Expense] = None, ignore_request_data: bool = False
 ) -> ExpenseForm:
     if ignore_request_data:
+        logger.debug(f"{ignore_request_data = }")
         expense_form = ExpenseForm(formdata=None)
     else:
         expense_form = ExpenseForm()
     if expense:
-        expense_form.set_data_from_model(expense)
+        expense_form.date.data = expense.date
+        expense_form.price.data = expense.price
+        expense_form.description.data = expense.description
+        expense_form.category.data = expense.category
     return expense_form
 
 
@@ -69,7 +74,7 @@ def get_expenses(
             query = query.filter(Expense.date <= to_date)
         except Exception as e:
             logger.error(f"{e = }")
-    if category:
+    if category and category != "All":
         try:
             query = query.filter(Expense.category == category)
         except Exception as e:
@@ -86,12 +91,49 @@ def get_expense_by_id(expense_id: int) -> Optional[Expense]:
     return expense
 
 
+def update_expense_by_id(expense_id: int, expense_data: dict) -> Optional[Expense]:
+    logger.debug(f"{expense_id = } {expense_data = }")
+    expense = get_expense_by_id(expense_id)
+    logger.debug(f"{expense = }")
+    if not expense:
+        logger.error(f"Expense {expense_id} not found.")
+        return
+
+    if date := expense_data.get("date"):
+        logger.debug(f"{date = }")
+        expense.date = date
+
+    if category := expense_data.get("category"):
+        logger.debug(f"{category = }")
+        expense.category = category
+
+    if price := expense_data.get("price"):
+        logger.debug(f"{price = }")
+        expense.price = price
+
+    if description := expense_data.get("description"):
+        logger.debug(f"{description = }")
+        expense.description = description
+
+    expense.updated_by = current_user.user_id
+    expense.updated_at = datetime.datetime.now()
+
+    try:
+        db.session.commit()
+        return expense
+    except Exception as e:
+        logger.error(f"Error updating expense: {e}")
+        db.session.rollback()
+        return
+
+
 def add_expense(expense_data: dict) -> Optional[Expense]:
     new_expense = Expense(
         date=expense_data.get("date"),
         category=expense_data.get("category"),
         price=expense_data.get("price"),
         description=expense_data.get("description"),
+        created_by=current_user.user_id,
     )
     try:
         db.session.add(new_expense)
@@ -102,53 +144,6 @@ def add_expense(expense_data: dict) -> Optional[Expense]:
         logger.error(f"Error adding expense: {e}")
         db.session.rollback()
         return
-
-
-# def update_customer_by_id(customer_id: int, customer_data: dict) -> Optional[Customer]:
-#     logger.debug(f"{customer_id = } {customer_data = }")
-
-#     customer = get_customer_by_id(customer_id)
-#     logger.debug(f"{customer = }")
-#     if not customer:
-#         logger.error(f"{customer_id} not found.")
-#         return
-
-#     if name := customer_data.get("name"):
-#         logger.debug(f"{name = }")
-#         customer.name = name
-
-#     if phone := customer_data.get("phone"):
-#         logger.debug(f"{phone = }")
-#         customer.phone = phone
-
-#     if email := customer_data.get("email"):
-#         logger.debug(f"{email = }")
-#         customer.email = email
-
-#     if emergency_contact_name := customer_data.get("emergency_contact_name"):
-#         logger.debug(f"{emergency_contact_name = }")
-#         customer.emergency_contact_name = emergency_contact_name
-
-#     if emergency_contact_phone := customer_data.get("emergency_contact_phone"):
-#         logger.debug(f"{emergency_contact_phone = }")
-#         customer.emergency_contact_phone = emergency_contact_phone
-
-#     if signed_up_on := customer_data.get("signed_up_on"):
-#         logger.debug(f"{signed_up_on = }")
-#         customer.signed_up_on = signed_up_on
-
-#     is_active = customer_data.get("is_active")
-#     if is_active is not None:
-#         logger.debug(f"{is_active = }")
-#         customer.is_active = is_active
-
-#     try:
-#         db.session.commit()
-#         return customer
-#     except Exception as e:
-#         logger.error(f"Error updating customer: {e}")
-#         db.session.rollback()
-#         return
 
 
 def delete_expense_by_id(expense_id: int) -> None:

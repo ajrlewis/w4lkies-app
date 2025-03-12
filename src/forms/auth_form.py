@@ -1,18 +1,13 @@
 from datetime import date
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
+
+from forms.user_form import UserForm
 
 
 class AuthForm(FlaskForm):
-    email = StringField(
-        "Email",
-        validators=[DataRequired()],
-        render_kw={"placeholder": "daphne@themysterymachine.com"},
-    )
+    email = UserForm.email
 
-    password = PasswordField(
-        "Password",
-        validators=[DataRequired()],
-        render_kw={"placeholder": "Creeps and Crawls!"},
-    )
+    password = UserForm.password
