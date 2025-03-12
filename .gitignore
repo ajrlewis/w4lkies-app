@@ -9,6 +9,6 @@ __pycache__/
 .env
 src/instance/
 backups/
-migrations/
+# migrations/
 venv/
 
