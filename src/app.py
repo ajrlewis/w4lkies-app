@@ -1,7 +1,7 @@
 import os
 import sys
 
-from flask import Flask
+from flask import Flask, request
 
 # from flask_cors import CORS
 from flask_login import LoginManager
@@ -60,8 +60,13 @@ def create_app(Config) -> Flask:
         # Request Handling
         @app.before_request
         def before_request_func():
-            # Code to run before each request
-            pass
+            logger.info(f"Request Method: {request.method}")
+            logger.info(f"Request URL: {request.url}")
+            logger.info(f"Request Headers: {request.headers}")
+            logger.info(f"Request Data (args): {request.args}")
+            logger.info(f"Request Data (form): {request.form}")
+            # logger.info(f"Request Data (json): {request.get_json()}")
+            logger.info(f"Request Data (files): {request.files}")
 
         @app.after_request
         def after_request_func(response):
