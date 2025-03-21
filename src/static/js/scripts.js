@@ -42,6 +42,13 @@ document.body.addEventListener('htmx:beforeOnLoad', function(evt) {
   }
 });
 
+// Get and update the latest CSRF token
+document.addEventListener('refreshCSRF', (e) => {
+  const newToken = e.detail.value;
+  document.querySelector('input[name="csrf_token"]').value = newToken;
+  document.body.setAttribute('hx-headers', `{"X-CSRFToken": "${newToken}"}`);
+});
+
 
 /// Check if the client is authenticated
 fetch('/auth/authenticated')

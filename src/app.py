@@ -6,7 +6,8 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect, generate_csrf
+
 from loguru import logger
 
 from middleware.htmx import handle_htmx_redirect
@@ -52,13 +53,18 @@ def create_app(Config) -> Flask:
         app.register_blueprint(expenses_bp, url_prefix="/expenses")
 
         # Request Handling
-        @app.before_request
-        def before_request_func():
-            pass
+        # @app.before_request
+        # def before_request_func():
+        #     ...
 
         @app.after_request
         def after_request_func(response):
             response = handle_htmx_redirect(response)
+
+            # Trigger HTMX refresh CSFR token
+            new_token = generate_csrf()
+            response.headers["HX-Trigger"] = {"refreshCSRF": new_token}
+
             return response
 
         # Error Handling
