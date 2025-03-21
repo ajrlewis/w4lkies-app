@@ -42,11 +42,13 @@ document.body.addEventListener('htmx:beforeOnLoad', function(evt) {
   }
 });
 
-// Check the user is signed in.
+
+/// Check if the client is authenticated
 fetch('/auth/authenticated')
   .then(response => response.json())
   .then(data => {
     if (!data.authenticated && window.location.pathname !== '/auth/') {
       window.location.href = '/auth/';
+      setTimeout(() => window.location.reload(), 0); // Update the CSRF token
     }
   });
