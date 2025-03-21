@@ -41,6 +41,7 @@ def create_app(Config) -> Flask:
 
     with app.app_context():
         # Import all models for database initialization and migrations.
+        logger.debug("importing models")
         import models
 
         # Register application routes.
