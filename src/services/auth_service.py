@@ -15,8 +15,12 @@ login_manager.login_message_category = "error"
 
 @login_manager.user_loader
 def load_user(user_id: int):
-    user = user_service.get_user_by_id(int(user_id))
-    return user
+    try:
+        user = user_service.get_user_by_id(int(user_id))
+        return user
+    except Exception as e:
+        logger.error(f"Unable to load user: {e}")
+        return False
 
 
 def get_auth_form() -> AuthForm:
