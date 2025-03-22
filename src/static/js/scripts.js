@@ -49,7 +49,6 @@ document.addEventListener('refreshCSRF', (e) => {
   document.body.setAttribute('hx-headers', `{"X-CSRFToken": "${newToken}"}`);
 });
 
-
 /// Check if the client is authenticated
 fetch('/auth/authenticated')
   .then(response => response.json())
