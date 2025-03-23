@@ -19,7 +19,7 @@
   </div>
 </form>
 
-<button class="button button-edit u-full-width" onclick="exportTableToCsv('Expenses')">Download as CSV</button>
+<button class="button button-primary u-half-width" onclick="exportTableToCsv('Expenses')">Download as CSV</button>
 
 <br>
 <br>
@@ -27,6 +27,6 @@
 
 <div id="expenses">
   {% with expenses=expenses %}
-    {% include "expenses.html" %}
+    {% include "expenses/expenses.html" %}
   {% endwith %}
 </div>

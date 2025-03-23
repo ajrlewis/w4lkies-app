@@ -11,7 +11,7 @@ expenses_bp = Blueprint("expenses_bp", __name__)
 @expenses_bp.route("/base", methods=["GET"])
 @login_required
 def get_expenses_base():
-    return render_template("expenses_base.html")
+    return render_template("expenses/expenses_base.html")
 
 
 @expenses_bp.route("/info", methods=["GET"])
@@ -21,7 +21,9 @@ def get_expenses_info():
     expense_filter_form = expense_service.get_expense_filter_form()
     logger.debug(f"{expenses = } {expense_filter_form = }")
     return render_template(
-        "expenses_info.html", expenses=expenses, expense_filter_form=expense_filter_form
+        "expenses/expenses_info.html",
+        expenses=expenses,
+        expense_filter_form=expense_filter_form,
     )
 
 
@@ -32,7 +34,7 @@ def get_expenses():
     logger.debug(f"{data = }")
     expenses = expense_service.get_expenses(**data)
     logger.debug(f"{expenses = }")
-    return render_template("expenses.html", expenses=expenses)
+    return render_template("expenses/expenses.html", expenses=expenses)
 
 
 @expenses_bp.route("/<int:expense_id>", methods=["GET"])
@@ -41,7 +43,7 @@ def get_expense_by_id(expense_id: int):
     expense = expense_service.get_expense_by_id(expense_id)
     logger.debug(f"{expense = }")
     if expense:
-        return render_template("expense_detail.html", expense=expense)
+        return render_template("expenses/expense_detail.html", expense=expense)
     return "", 404
 
 
@@ -50,7 +52,7 @@ def get_expense_by_id(expense_id: int):
 def get_expense_form():
     expense_form = expense_service.get_expense_form()
     logger.debug(f"{expense_form = }")
-    return render_template("expense_form.html", expense_form=expense_form)
+    return render_template("expenses/expense_form.html", expense_form=expense_form)
 
 
 @expenses_bp.route("/<int:expense_id>/edit", methods=["GET"])
@@ -62,7 +64,7 @@ def edit_expense(expense_id: int):
     expense_form = expense_service.get_expense_form(expense)
     logger.debug(f"{expense_form = }")
     return render_template(
-        "expense_edit.html", expense=expense, expense_form=expense_form
+        "expenses/expense_edit.html", expense=expense, expense_form=expense_form
     )
 
 
@@ -82,7 +84,7 @@ def update_expense(expense_id: int):
         logger.error(f"{expense_form.errors = }")
         return (
             render_template(
-                "expense_edit.html", expense=expense, expense_form=expense_form
+                "expenses/expense_edit.html", expense=expense, expense_form=expense_form
             ),
             422,
         )
@@ -102,14 +104,14 @@ def add_expense():
     else:
         logger.error(f"{expense_form.errors = }")
         return (
-            render_template("expense_form.html", expense_form=expense_form),
+            render_template("expenses/expense_form.html", expense_form=expense_form),
             422,
         )
     # Reset form
     expense_form = expense_service.get_expense_form(ignore_request_data=True)
     logger.debug(f"{expense_form = }")
     logger.debug(f"{expense_form.data = }")
-    return render_template("expense_form.html", expense_form=expense_form)
+    return render_template("expenses/expense_form.html", expense_form=expense_form)
 
 
 @expenses_bp.route("/<int:expense_id>", methods=["DELETE"])

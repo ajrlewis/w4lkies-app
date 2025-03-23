@@ -1,6 +1,6 @@
 <table class="table u-full-width">
   <caption>
-    Showing {{ expenses | length }} expenses.
+    <!-- Showing {{ expenses | length }} expenses. -->
   </caption>
   <thead>
     <tr>
@@ -14,7 +14,7 @@
   <!-- <tbody> -->
   <tbody hx-target="closest tr" hx-swap="outerHTML">
     {% for expense in expenses %}
-      {% include "expense_detail.html" %}
+      {% include "expenses/expense_detail.html" %}
     {% endfor %}
   </tbody>
 </table>
