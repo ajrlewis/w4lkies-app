@@ -1,4 +1,6 @@
-<form id="auth-form" hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML swap:100ms">
+<form id="auth-form"
+
+ hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML swap:100ms">
   {{ auth_form.csrf_token }}
   {% with errors=auth_form.csrf_token.errors %}
     {% include "form_errors.html" %}

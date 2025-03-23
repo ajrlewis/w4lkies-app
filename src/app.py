@@ -6,11 +6,11 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_wtf.csrf import CSRFProtect
 
 from loguru import logger
 
-from middleware.htmx import handle_htmx_redirect
+from middleware.htmx import handle_htmx_redirect, refresh_csrf_token_in_response
 
 # Configure logging
 LOGURU_LEVEL = os.getenv("LOGURU_LEVEL", "INFO")
@@ -41,8 +41,8 @@ def create_app(Config) -> Flask:
 
     with app.app_context():
         # Import all models for database initialization and migrations.
-        logger.debug("importing models")
         import models
+        from services import database_service
 
         # Register application routes.
         from blueprints.index_bp import index_bp
@@ -54,18 +54,15 @@ def create_app(Config) -> Flask:
         app.register_blueprint(expenses_bp, url_prefix="/expenses")
 
         # Request Handling
-        # @app.before_request
-        # def before_request_func():
-        #     ...
+        @app.before_request
+        def before_request_func():
+            if request.blueprint not in [None, "auth_bp", "index_bp"]:
+                logger.debug("Waking up database")
+                database_service.wake_up_database()
 
         @app.after_request
         def after_request_func(response):
             response = handle_htmx_redirect(response)
-
-            # Trigger HTMX refresh CSFR token
-            new_token = generate_csrf()
-            response.headers["HX-Trigger"] = {"refreshCSRF": new_token}
-
             return response
 
         # Error Handling

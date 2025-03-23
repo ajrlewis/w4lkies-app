@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
+from flask_wtf.csrf import generate_csrf
 from loguru import logger
 
 from services import auth_service
@@ -12,7 +13,6 @@ auth_bp = Blueprint("auth_bp", __name__)
 @auth_bp.route("/", methods=["GET"])
 def base():
     auth_form = auth_service.get_auth_form()
-    logger.debug(f"{auth_form.errors = }")
     return render_template("auth.html", auth_form=auth_form)
 
 
@@ -47,6 +47,13 @@ def sign_in():
 @auth_bp.route("/authenticated", methods=["GET"])
 def authenticated():
     return jsonify({"authenticated": current_user.is_authenticated})
+
+
+@auth_bp.route("/refresh-csrf-token", methods=["GET"])
+def refresh_csrf_token():
+    new_token = generate_csrf()
+    logger.debug(f"{new_token = }")
+    return jsonify({"token": new_token})
 
 
 @auth_bp.route("/sign-out", methods=["GET"])

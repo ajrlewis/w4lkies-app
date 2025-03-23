@@ -3,12 +3,18 @@
   <br>
   <div class="row">
     <div class="six columns">
-      <button class="button button-primary u-full-width" hx-get="/expenses/add" hx-target="#expenses-container">
+      <button class="button button-primary u-full-width"
+        hx-get="/expenses/add"
+        hx-target="#expenses-container"
+        hx-swap="innerHTML">
         Add Expense
       </button>
     </div>
     <div class="six columns">
-      <button class="button button-primary u-full-width" hx-get="/expenses/info" hx-target="#expenses-container">
+      <button class="button button-primary u-full-width"
+        hx-get="/expenses/info"
+        hx-target="#expenses-container"
+        hx-swap="innerHTML">>
         Expense Info
       </button>
   </div>

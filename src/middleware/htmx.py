@@ -1,6 +1,8 @@
+import json
 from urllib.parse import urlparse
 
 from flask import request, Response
+from flask_wtf.csrf import generate_csrf
 from loguru import logger
 
 
@@ -45,3 +47,30 @@ def handle_htmx_redirect(response: Response) -> Response:
     response.headers["HX-Redirect"] = f"{redirect.path}{querystring}"
 
     return response
+
+
+def refresh_csrf_token_in_response(response: Response) -> Response:
+    """
+    Generates a new CSRF token and includes it in the response as an HX-Trigger header.
+
+    This method is used to refresh the CSRF token after an HTMX request, ensuring that the
+    client has the most up-to-date token for future requests.
+
+    Args:
+        response (Response): The response object to be modified.
+
+    Returns:
+        Response: The modified response object with the new CSRF token.
+
+    Raises:
+        ValueError: If the input response object is invalid.
+    """
+    try:
+        logger.debug("Generating new CSRF token")
+        new_token = generate_csrf()
+        hx_trigger = json.dumps({"refreshCSRF": {"token": new_token}})
+        response.headers["HX-Trigger"] = hx_trigger
+        return response
+    except Exception as e:
+        logger.error(f"Error generating CSRF token: {e}")
+        raise

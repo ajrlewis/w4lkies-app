@@ -29,10 +29,10 @@ class Config:
 
     # Session settings
     REMEMBER_COOKIE_DURATION = timedelta(
-        seconds=int(os.getenv("REMEMBER_COOKIE_DURATION", 10))
-        # seconds=int(os.getenv("REMEMBER_COOKIE_DURATION", 600))
+        seconds=int(os.getenv("REMEMBER_COOKIE_DURATION", 600))
     )
     PERMANENT_SESSION_LIFETIME = REMEMBER_COOKIE_DURATION
+    WTF_CSRF_TIME_LIMIT = REMEMBER_COOKIE_DURATION.seconds
 
     # Security settings
     SECRET_KEY = os.getenv("SECRET_KEY")
