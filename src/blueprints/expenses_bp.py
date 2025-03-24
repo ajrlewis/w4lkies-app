@@ -79,7 +79,7 @@ def update_expense(expense_id: int):
         expense_data = expense_form.data
         logger.debug(f"{expense_data = }")
         expense = expense_service.update_expense_by_id(expense_id, expense_data)
-        return render_template("expense_detail.html", expense=expense)
+        return render_template("expenses/expense_detail.html", expense=expense)
     else:
         logger.error(f"{expense_form.errors = }")
         return (
