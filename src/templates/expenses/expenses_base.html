@@ -6,14 +6,20 @@
       <button class="button button-primary u-half-width"
         hx-get="/expenses/add"
         hx-target="#expenses-container"
-        hx-swap="innerHTML">
+        hx-swap="innerHTML"
+        hx-indicator="#add-expense-spinner"
+        >
         Add Expense
+        <img id="add-expense-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
       </button>
       <button class="button button-primary u-half-width"
         hx-get="/expenses/info"
         hx-target="#expenses-container"
-        hx-swap="innerHTML">>
+        hx-swap="innerHTML"
+        hx-indicator="#expense-info-spinner"
+        >
         Expense Info
+        <img id="expense-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
       </button>
   <br>
   <br>

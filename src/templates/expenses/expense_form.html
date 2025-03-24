@@ -1,4 +1,4 @@
-<form id="expense-form" hx-post="/expenses/" hx-swap="outerHTML" hx-indicator="#spinner">
+<form id="expense-form" hx-post="/expenses/" hx-swap="outerHTML" hx-indicator="#expense-form-spinner">
   {{ expense_form.csrf_token }}
   <div class="row">
     <div class="six columns">
@@ -37,8 +37,8 @@
     <div class="twelve columns">
       <button type="submit" class="button button-primary u-half-width">
         Add Expense
+        &nbsp;<img id="expense-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
       </button>
-      <img id="spinner" class="htmx-indicator" src="/static/img/bars.svg"/>      
     </div>
   </div>
 </form>
