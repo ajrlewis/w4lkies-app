@@ -1,11 +1,10 @@
-<form id="auth-form"
-
- hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML swap:100ms">
+<form id="auth-form" hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML swap:10000ms" hx-trigger="submit" hx-indicator="#spinner">
   {{ auth_form.csrf_token }}
   {% with errors=auth_form.csrf_token.errors %}
     {% include "form_errors.html" %}
   {% endwith %}
-  <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
+  <!-- <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/> -->
+  <input type="hidden" name="next" value=""/>
   <div class="row">
     <div class="six columns">
       {{ auth_form.email.label() }}
@@ -26,6 +25,7 @@
   <div class="row">
     <div class="twelve columns">
       <button class="button button-primary u-half-width" type="submit">Sign In</button>
+      <img id="spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
     </div>
   </div>
 </form>
