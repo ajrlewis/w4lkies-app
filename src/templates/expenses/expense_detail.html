@@ -8,8 +8,10 @@
       class="button button-edit u-half-width"
       hx-target="#expense-{{ expense.expense_id }}"
       hx-swap="outerHTML swap:100ms"
-      hx-get="/expenses/{{ expense.expense_id }}/edit">
+      hx-get="/expenses/{{ expense.expense_id }}/edit"
+      hx-indicator="#expense-edit-spinner">
       Edit
+      <img id="expense-edit-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
     </button>
     <button
       class="button button-delete u-half-width"
@@ -17,8 +19,10 @@
       hx-swap="outerHTML swap:100ms"
       hx-delete="/expenses/{{ expense.expense_id }}"
       hx-confirm="Are you sure you wish to delete this expense?"
-      hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}'>
+      hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}'
+      hx-indicator="#expense-delete-spinner">
       Delete
+      <img id="expense-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
     </button>
   </td>
 </tr>

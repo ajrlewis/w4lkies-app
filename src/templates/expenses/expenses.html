@@ -1,7 +1,7 @@
 <table class="table u-full-width">
-  <caption>
+  <!-- <caption> -->
     <!-- Showing {{ expenses | length }} expenses. -->
-  </caption>
+  <!-- </caption> -->
   <thead>
     <tr>
       <th>Date</th>
@@ -11,7 +11,6 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <!-- <tbody> -->
   <tbody hx-target="closest tr" hx-swap="outerHTML">
     {% for expense in expenses %}
       {% include "expenses/expense_detail.html" %}

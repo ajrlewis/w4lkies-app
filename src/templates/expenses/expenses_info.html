@@ -19,7 +19,10 @@
   </div>
 </form>
 
-<button class="button button-primary u-half-width" onclick="exportTableToCsv('Expenses')">Download as CSV</button>
+<button class="button button-primary u-half-width" onclick="exportTableToCsv('Expenses')" hx-indicator="#expense-download-spinner">
+  Download as CSV
+  <img id="expense-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
 
 <br>
 <br>

@@ -24,11 +24,13 @@
       {% endwith %}
     </td>
     <td>
-    <button class="button-edit u-full-width" hx-put="/expenses/{{ expense.expense_id }}" hx-include="closest tr">
+    <button class="button-edit u-full-width" hx-put="/expenses/{{ expense.expense_id }}" hx-include="closest tr" hx-indicator="#expense-save-spinner">
       Save
+      <img id="expense-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
     </button>
-    <button class="button-delete u-full-width" hx-get="/expenses/{{ expense.expense_id }}">
+    <button class="button-delete u-full-width" hx-get="/expenses/{{ expense.expense_id }}" hx-indicator="#expense-delete-spinner">
       Cancel
+      <img id="expense-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
     </button>
     </td>
 </tr>
