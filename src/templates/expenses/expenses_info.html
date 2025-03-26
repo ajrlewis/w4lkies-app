@@ -1,3 +1,4 @@
+<h2>Filter Expenses</h2>
 <form id="expense-filter-form"
   hx-get="/expenses"
   hx-target="#expenses"
@@ -19,14 +20,11 @@
   </div>
 </form>
 
-<button class="button button-primary u-half-width" onclick="exportTableToCsv('Expenses')" hx-indicator="#expense-download-spinner">
-  Download as CSV
+<h2>Showing Expenses</h2>
+<button class="button button-secondary u-half-width" onclick="exportTableToCsv('Expenses')" hx-indicator="#expense-download-spinner">
+  Download Expenses
   <img id="expense-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
 </button>
-
-<br>
-<br>
-<br>
 
 <div id="expenses">
   {% with expenses=expenses %}

@@ -1,0 +1,21 @@
+<tr id="dogs-{{ dog.dog_id }}">
+  <td>{{ dog.name }}</td>
+  <td>{{ dog.date_of_birth }}</td>
+  <td>{{ dog.is_allowed_treats }}</td>
+  <td>{{ dog.is_allowed_off_the_lead }}</td>
+  <td>{{ dog.is_allowed_on_social_media }}</td>
+  <td>{{ dog.is_neutered_or_spayed }}</td>
+  <td>{{ dog.behavioral_issues }}</td>
+  <td>{{ dog.medical_needs }}</td>
+  <td>{{ dog.breed }}</td>
+  <td>{{ dog.customer.name }}</td>
+  <td>{{ dog.vet.name }}</td>
+  <td>
+    {% with object_type='dogs', object_id=dog.dog_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %}
+    {% with object_type='dogs', object_id=dog.dog_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
+  </td>
+</tr>

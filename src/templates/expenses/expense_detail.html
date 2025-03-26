@@ -1,28 +1,14 @@
-<tr id="expense-{{ expense.expense_id }}">
+<tr id="expenses-{{ expense.expense_id }}">
   <td>{{ expense.date }}</td>
   <td>{{ expense.category }}</td>
   <td>{{ "{:0,.2f}".format(expense.price) }}</th>  
   <td>{{ expense.description }}</td>
   <td>
-    <button
-      class="button button-edit u-half-width"
-      hx-target="#expense-{{ expense.expense_id }}"
-      hx-swap="outerHTML swap:100ms"
-      hx-get="/expenses/{{ expense.expense_id }}/edit"
-      hx-indicator="#expense-{{ expense.expense_id}}-edit-spinner">
-      Edit
-      <img id="expense-{{ expense.expense_id}}-edit-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-    </button>
-    <button
-      class="button button-delete u-half-width"
-      hx-target="#expense-{{ expense.expense_id }}"
-      hx-swap="outerHTML swap:100ms"
-      hx-delete="/expenses/{{ expense.expense_id }}"
-      hx-confirm="Are you sure you wish to delete this expense?"
-      hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}'
-      hx-indicator="#expense-{{ expense.expense_id}}-delete-spinner">
-      Delete
-      <img id="expense-{{ expense.expense_id}}-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-    </button>
+    {% with object_type='expenses', object_id=expense.expense_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %}
+    {% with object_type='expenses', object_id=expense.expense_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
   </td>
 </tr>

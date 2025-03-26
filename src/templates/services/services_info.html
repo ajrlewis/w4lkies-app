@@ -1,0 +1,11 @@
+<h2>Showing Services</h2>
+<button class="button button-secondary u-half-width" onclick="exportTableToCsv('Services')" hx-indicator="#service-download-spinner">
+  Download Services
+  <img id="service-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
+
+<div id="services">
+  {% with services=services %}
+    {% include "services/services.html" %}
+  {% endwith %}
+</div>

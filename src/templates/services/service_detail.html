@@ -1,0 +1,15 @@
+<tr id="services-{{ service.service_id }}">
+  <td>{{ service.name }}</td>
+  <td>{{ service.description }}</td>
+  <td>{{ service.price }}</td>
+  <td>{{ service.duration }}</td>
+  <td>{{ service.is_active }}</td>
+  <td>
+    {% with object_type='services', object_id=service.service_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %}
+    {% with object_type='services', object_id=service.service_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
+  </td>
+</tr>

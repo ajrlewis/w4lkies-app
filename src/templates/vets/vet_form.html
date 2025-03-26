@@ -1,0 +1,30 @@
+<h2>Add a Vet</h2>
+<form id="vet-form" hx-target="#vets-container" hx-post="/vets/" hx-swap="innerHTML swap:100ms" hx-indicator="#vet-form-spinner">
+  {{ vet_form.csrf_token }}
+  <div class="row">
+    <div class="four columns">
+      {% with form_field=vet_form.name %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=vet_form.address %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=vet_form.phone %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button type="submit" class="button button-primary u-half-width">
+        Add Vet
+        <img id="vet-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+</form>

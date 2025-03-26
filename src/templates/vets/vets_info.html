@@ -1,0 +1,11 @@
+<h2>Showing Vets</h2>
+<button class="button button-secondary u-half-width" onclick="exportTableToCsv('Vets')" hx-indicator="#vet-download-spinner">
+  Download Vets
+  <img id="vet-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
+
+<div id="vets">
+  {% with vets=vets %}
+    {% include "vets/vets.html" %}
+  {% endwith %}
+</div>

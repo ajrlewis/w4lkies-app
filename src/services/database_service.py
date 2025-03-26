@@ -1,7 +1,11 @@
+import datetime
+
 from loguru import logger
 from sqlalchemy.sql import text
 
 from app import db
+
+tables = ["user", "customer", "vet", "dog", "service", "booking", "expense", "invoice"]
 
 
 def wake_up_database(max_attempts=5, initial_delay=1, max_delay=30):
@@ -18,3 +22,14 @@ def wake_up_database(max_attempts=5, initial_delay=1, max_delay=30):
                 raise Exception(
                     f"Failed to wake up database after {max_attempts} attempts: {str(e)}"
                 )
+
+
+def dump_database():
+    list_of_table_data = []
+    for table in tables:
+        table_data = {f"{table}": "", "data": []}
+    return
+
+
+def load_database():
+    pass

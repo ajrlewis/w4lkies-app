@@ -1,0 +1,26 @@
+<h2>Filter Customers</h2>
+<form id="customer-filter-form"
+  hx-get="/customers"
+  hx-target="#customers"
+  hx-trigger="change"
+  hx-swap="innerHTML">
+  <div class="row">
+    <div class="four columns">
+      {% with form_field=customer_filter_form.is_active %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+</form>
+
+<h2>Showing Customers</h2>
+<button class="button button-secondary u-half-width" onclick="exportTableToCsv('Customers')" hx-indicator="#customer-download-spinner">
+  Download Customers
+  <img id="customer-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
+
+<div id="customers">
+  {% with customers=customers %}
+    {% include "customers/customers.html" %}
+  {% endwith %}
+</div>

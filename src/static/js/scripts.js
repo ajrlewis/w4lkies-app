@@ -6,9 +6,15 @@ function toggleCheckbox(checkbox) {
 }
 
 // Get current date and time
-function getCurrentTime() {
+function getCurrentDateTime() {
   var now = new Date();
-  return now.toLocaleString();
+  var year = now.getFullYear();
+  var month = (now.getMonth() + 1).toString().padStart(2, '0');
+  var day = now.getDate().toString().padStart(2, '0');
+  var hour = now.getHours().toString().padStart(2, '0');
+  var minute = now.getMinutes().toString().padStart(2, '0');
+  var second = now.getSeconds().toString().padStart(2, '0');
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
 // Download table contents
@@ -30,7 +36,7 @@ function exportTableToCsv(tableName = 'table') {
   const encodedUri = encodeURI(`data:text/csv;charset=utf-8,${csvContent.join('\n')}`);
   const link = document.createElement('a');
   link.setAttribute('href', encodedUri);
-  link.setAttribute('download', `${tableName}.csv`);
+  link.setAttribute('download', `${tableName} (${getCurrentDateTime()}).csv`);
   link.click();
 }
 

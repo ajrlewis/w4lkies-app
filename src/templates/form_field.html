@@ -1,0 +1,5 @@
+{{ form_field.label() }}
+{{ form_field(class_="u-full-width") }}
+{% with errors=form_field.errors %}
+  {% include "form_errors.html" %}
+{% endwith %}

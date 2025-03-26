@@ -1,0 +1,26 @@
+<table class="table u-full-width">
+  <!-- <caption> -->
+    <!-- Showing {{ dogs | length }} dogs. -->
+  <!-- </caption> -->
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Allowed Treats</th>
+      <th>Allowed Off Lead</th>
+      <th>Allowed On Social Media</th>
+      <th>Neutered Or Spayed</th>
+      <th>Behavioral Issues</th>
+      <th>Medical Needs</th>
+      <th>Breed</th>
+      <th>Customer</th>
+      <th>Vet</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody hx-target="closest tr" hx-swap="outerHTML">
+    {% for dog in dogs %}
+      {% include "dogs/dog_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

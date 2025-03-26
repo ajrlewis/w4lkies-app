@@ -1,0 +1,37 @@
+<tr hx-trigger="cancel" class="editing" hx-get="/bookings/{{ booking.booking_id }}">
+  <td>
+    {% with form_field=booking_form.date %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=booking_form.time %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=booking_form.user_id %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=booking_form.customer_id %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=booking_form.service_id %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    <button class="button-edit u-half-width" hx-put="/bookings/{{ booking.booking_id }}" hx-include="closest tr" hx-indicator="#booking-save-spinner">
+      Save
+      <img id="booking-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+    <button class="button-delete u-half-width" hx-get="/bookings/{{ booking.booking_id }}" hx-indicator="#booking-cancel-spinner">
+      Cancel
+      <img id="booking-cancel-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+  </td>
+</tr>

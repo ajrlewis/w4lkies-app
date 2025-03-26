@@ -47,10 +47,20 @@ def create_app(Config) -> Flask:
         # Register application routes.
         from blueprints.index_bp import index_bp
         from blueprints.auth_bp import auth_bp
+        from blueprints.customers_bp import customers_bp
+        from blueprints.vets_bp import vets_bp
+        from blueprints.dogs_bp import dogs_bp
+        from blueprints.services_bp import services_bp
+        from blueprints.bookings_bp import bookings_bp
         from blueprints.expenses_bp import expenses_bp
 
         app.register_blueprint(index_bp, url_prefix="/")
         app.register_blueprint(auth_bp, url_prefix="/auth")
+        app.register_blueprint(customers_bp, url_prefix="/customers")
+        app.register_blueprint(vets_bp, url_prefix="/vets")
+        app.register_blueprint(dogs_bp, url_prefix="/dogs")
+        app.register_blueprint(services_bp, url_prefix="/services")
+        app.register_blueprint(bookings_bp, url_prefix="/bookings")
         app.register_blueprint(expenses_bp, url_prefix="/expenses")
 
         # Request Handling

@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Services</h1>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button button-primary u-half-width"
+        hx-get="/services/add"
+        hx-target="#services-container"
+        hx-swap="innerHTML"
+        hx-indicator="#add-service-spinner"
+        >
+        Add Service
+        <img id="add-service-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button button-primary u-half-width"
+        hx-get="/services/info"
+        hx-target="#services-container"
+        hx-swap="innerHTML"
+        hx-indicator="#service-info-spinner"
+        >
+        Service Info
+        <img id="service-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="services-container"></div>
+  <br>
+  <br>
+  <br>
+</div>

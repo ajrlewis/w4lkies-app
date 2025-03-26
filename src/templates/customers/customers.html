@@ -1,0 +1,22 @@
+<table class="table u-full-width">
+  <!-- <caption> -->
+    <!-- Showing {{ customers | length }} customers. -->
+  <!-- </caption> -->
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Emergency Contact Name</th>
+      <th>Emergency Contact Phone</th>
+      <th>Signed Up On</th>
+      <th>Active</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody hx-target="closest tr" hx-swap="outerHTML">
+    {% for customer in customers %}
+      {% include "customers/customer_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

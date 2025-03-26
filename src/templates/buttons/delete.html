@@ -1,0 +1,11 @@
+<button
+  class="button button-delete u-half-width"
+  hx-target="#{{ object_type }}-{{ object_id }}"
+  hx-swap="outerHTML swap:100ms"
+  hx-delete="/{{ object_type }}/{{ object_id }}"
+  hx-confirm="Are you sure you want to delete?"
+  hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}'
+  hx-indicator="#{{ object_type }}-{{ object_id }}-delete-spinner">
+  Delete
+  <img id="{{ object_type }}-{{ object_id }}-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>

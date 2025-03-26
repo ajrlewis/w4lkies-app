@@ -1,0 +1,37 @@
+<h2>Add a Service</h2>
+<form id="service-form" hx-target="#services-container" hx-post="/services/" hx-swap="innerHTML swap:100ms" hx-indicator="#service-form-spinner">
+  {{ service_form.csrf_token }}
+  <div class="row">
+    <div class="six columns">
+      {% with form_field=service_form.name %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {% with form_field=service_form.description %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      {% with form_field=service_form.price %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {% with form_field=service_form.duration %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button type="submit" class="button button-primary u-half-width">
+        Add Service
+        <img id="service-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+</form>

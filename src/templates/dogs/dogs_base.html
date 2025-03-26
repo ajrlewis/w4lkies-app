@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Dogs</h1>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button button-primary u-half-width"
+        hx-get="/dogs/add"
+        hx-target="#dogs-container"
+        hx-swap="innerHTML"
+        hx-indicator="#add-dog-spinner"
+        >
+        Add Dog
+        <img id="add-dog-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button button-primary u-half-width"
+        hx-get="/dogs/info"
+        hx-target="#dogs-container"
+        hx-swap="innerHTML"
+        hx-indicator="#dog-info-spinner"
+        >
+        Dog Info
+        <img id="dog-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="dogs-container"></div>
+  <br>
+  <br>
+  <br>
+</div>

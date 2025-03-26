@@ -1,0 +1,47 @@
+<tr hx-trigger="cancel" class="editing" hx-get="/customers/{{ customer.customer_id }}">
+  <td>
+    {% with form_field=customer_form.name %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=customer_form.phone %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=customer_form.email %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=customer_form.emergency_contact_name %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=customer_form.emergency_contact_phone %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=customer_form.signed_up_on %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with form_field=customer_form.is_active %}
+      {% include "form_field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    <button class="button-edit u-half-width" hx-put="/customers/{{ customer.customer_id }}" hx-include="closest tr" hx-indicator="#customer-save-spinner">
+      Save
+      <img id="customer-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+    <button class="button-delete u-half-width" hx-get="/customers/{{ customer.customer_id }}" hx-indicator="#customer-cancel-spinner">
+      Cancel
+      <img id="customer-cancel-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+  </td>
+</tr>

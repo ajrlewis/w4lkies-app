@@ -1,0 +1,20 @@
+<table class="table u-full-width">
+  <!-- <caption> -->
+    <!-- Showing {{ bookings | length }} bookings. -->
+  <!-- </caption> -->
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>User</th>
+      <th>Customer</th>
+      <th>Service</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody hx-target="closest tr" hx-swap="outerHTML">
+    {% for booking in bookings %}
+      {% include "bookings/booking_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

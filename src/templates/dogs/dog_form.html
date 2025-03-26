@@ -1,0 +1,76 @@
+<h2>Add a Dog</h2>
+<form id="dog-form" hx-target="#dogs-container" hx-post="/dogs/" hx-swap="innerHTML swap:100ms" hx-indicator="#dog-form-spinner">
+  {{ dog_form.csrf_token }}
+  <div class="row">
+    <div class="four columns">
+      {% with form_field=dog_form.name %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=dog_form.date_of_birth %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=dog_form.breed %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      {% with form_field=dog_form.customer_id %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {% with form_field=dog_form.vet_id %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="three columns">
+      {% with form_field=dog_form.is_allowed_treats %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="three columns">
+      {% with form_field=dog_form.is_allowed_off_the_lead %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="three columns">
+      {% with form_field=dog_form.is_allowed_on_social_media %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="three columns">
+      {% with form_field=dog_form.is_neutered_or_spayed %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      {% with form_field=dog_form.behavioral_issues %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {% with form_field=dog_form.medical_needs %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>    
+  </div>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button type="submit" class="button button-primary u-half-width">
+        Add Dog
+        <img id="dog-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+</form>

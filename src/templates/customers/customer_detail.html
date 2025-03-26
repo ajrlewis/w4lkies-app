@@ -1,0 +1,17 @@
+<tr id="customers-{{ customer.customer_id }}">
+  <td>{{ customer.name }}</td>
+  <td>{{ customer.phone }}</td>
+  <td>{{ customer.email }}</td>
+  <td>{{ customer.emergency_contact_name }}</td>
+  <td>{{ customer.emergency_contact_phone }}</td>
+  <td>{{ customer.signed_up_on }}</td>
+  <td>{{ customer.is_active }}</td>
+  <td>
+    {% with object_type='customers', object_id=customer.customer_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %}
+    {% with object_type='customers', object_id=customer.customer_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
+  </td>
+</tr>

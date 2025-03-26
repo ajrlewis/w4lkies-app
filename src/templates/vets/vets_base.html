@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Vets</h1>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button button-primary u-half-width"
+        hx-get="/vets/add"
+        hx-target="#vets-container"
+        hx-swap="innerHTML"
+        hx-indicator="#add-vet-spinner"
+        >
+        Add Vet
+        <img id="add-vet-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button button-primary u-half-width"
+        hx-get="/vets/info"
+        hx-target="#vets-container"
+        hx-swap="innerHTML"
+        hx-indicator="#vet-info-spinner"
+        >
+        Vet Info
+        <img id="vet-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="vets-container"></div>
+  <br>
+  <br>
+  <br>
+</div>

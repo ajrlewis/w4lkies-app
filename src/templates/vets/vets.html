@@ -1,0 +1,18 @@
+<table class="table u-full-width">
+  <!-- <caption> -->
+    <!-- Showing {{ vets | length }} vets. -->
+  <!-- </caption> -->
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody hx-target="closest tr" hx-swap="outerHTML">
+    {% for vet in vets %}
+      {% include "vets/vet_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

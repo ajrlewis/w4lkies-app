@@ -1,0 +1,49 @@
+<h2>Add a Booking</h2>
+<form id="booking-form" hx-target="#bookings-container" hx-post="/bookings/" hx-swap="innerHTML swap:100ms" hx-indicator="#booking-form-spinner">
+  {{ booking_form.csrf_token }}
+  <div class="row">
+    <div class="four columns">
+      {% with form_field=booking_form.user_id %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=booking_form.service_id %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=booking_form.customer_id %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="four columns">
+      {% with form_field=booking_form.date %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=booking_form.time %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with form_field=booking_form.repeating_weeks %}
+        {% include "form_field.html" %}
+      {% endwith %}
+    </div>
+    
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button type="submit" class="button button-primary u-half-width">
+        Add Booking
+        <img id="booking-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+</form>

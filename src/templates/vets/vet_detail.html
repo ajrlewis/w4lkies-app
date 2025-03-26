@@ -1,0 +1,13 @@
+<tr id="vets-{{ vet.vet_id }}">
+  <td>{{ vet.name }}</td>
+  <td>{{ vet.address }}</td>
+  <td>{{ vet.phone }}</td>
+  <td>
+    {% with object_type='vets', object_id=vet.vet_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %}
+    {% with object_type='vets', object_id=vet.vet_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
+  </td>
+</tr>

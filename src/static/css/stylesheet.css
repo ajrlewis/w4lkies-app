@@ -1,6 +1,9 @@
 :root {
   --primary-color: #3498db; /* Main theme color */
-  --secondary-color: #f1c40f; /* Secondary theme color */
+/*  --secondary-color: #; /* Secondary theme color */
+/*  --secondary-color: #2ecc71;*/
+  --secondary-color: #f1c40f;
+  --secondary-dark-color: #d89a00;
 
   --background-color: #f9f9f9; /* Background color */
   --background-dark-color: #333; /* Dark background for overlays or menus */
@@ -17,6 +20,17 @@
   --danger-color: #e74c3c; /* Color for destructive actions */
   --danger-dark-color: #c0392b; /* darker shade of --danger-color */
 
+}
+
+.button-secondary {
+  background-color: var(--secondary-color);
+  border: var(--secondary-color);
+  color: var(--text-light-color);
+}
+
+.button-secondary:hover {
+  background-color: var(--secondary-dark-color);
+  color: var(--text-light-color);
 }
 
 .button-edit {
@@ -56,6 +70,19 @@
 .errors li:before {
   content: "\26A0"; /* warning symbol */
   margin-right: 5px;
+}
+
+table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.scrollable-table {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 500px; /* adjust this value as needed */
+  margin: 0 auto;
 }
 
 /* Loading spinner */

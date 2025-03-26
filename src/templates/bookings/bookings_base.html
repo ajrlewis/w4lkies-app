@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Bookings</h1>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button button-primary u-half-width"
+        hx-get="/bookings/add"
+        hx-target="#bookings-container"
+        hx-swap="innerHTML"
+        hx-indicator="#add-booking-spinner"
+        >
+        Add Booking
+        <img id="add-booking-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button button-primary u-half-width"
+        hx-get="/bookings/info"
+        hx-target="#bookings-container"
+        hx-swap="innerHTML"
+        hx-indicator="#booking-info-spinner"
+        >
+        Booking Info
+        <img id="booking-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="bookings-container"></div>
+  <br>
+  <br>
+  <br>
+</div>

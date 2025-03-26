@@ -1,0 +1,9 @@
+<button
+  class="button button-edit u-half-width"
+  hx-target="#{{ object_type }}-{{ object_id }}"
+  hx-swap="outerHTML swap:100ms"
+  hx-get="/{{ object_type }}/{{ object_id }}/edit"
+  hx-indicator="#{{ object_type }}-{{ object_id }}-edit-spinner">
+  Edit
+  <img id="{{ object_type }}-{{ object_id }}-edit-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
