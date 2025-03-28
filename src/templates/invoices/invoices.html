@@ -1,0 +1,25 @@
+<table class="table u-full-width">
+  <!-- <caption> -->
+    <!-- Showing {{ invoices | length }} invoices. -->
+  <!-- </caption> -->
+  <thead>
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Date Issued</th>
+      <th>Date Due</th>
+      <th>Date Paid</th>
+      <th>Subtotal / £</th>
+      <th>Discount / £</th>
+      <th>Total / £</th>
+      <th>Customer</th>
+      <th>Reference</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody hx-target="closest tr" hx-swap="outerHTML">
+    {% for invoice in invoices %}
+      {% include "invoices/invoice_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

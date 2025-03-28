@@ -1,37 +1,37 @@
 <tr hx-trigger="cancel" class="editing" hx-get="/services/{{ service.service_id }}">
-    <td>
-      {% with form_field=service_form.name %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {% with form_field=service_form.description %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {% with form_field=service_form.price %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {% with form_field=service_form.duration %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {% with form_field=service_form.is_active %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      <button class="button-edit u-half-width" hx-put="/services/{{ service.service_id }}" hx-include="closest tr" hx-indicator="#service-save-spinner">
-        Save
-        <img id="service-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-      </button>
-      <button class="button-delete u-half-width" hx-get="/services/{{ service.service_id }}" hx-indicator="#service-delete-spinner">
-        Cancel
-        <img id="service-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-      </button>
-    </td>
+  <td>
+    {% with field=service_form.name %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=service_form.description %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=service_form.price %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=service_form.duration %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=service_form.is_active %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    <button class="button-edit u-half-width" hx-put="/services/{{ service.service_id }}" hx-include="closest tr" hx-indicator="#service-save-spinner">
+      Save
+      <img id="service-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+    <button class="button-delete u-half-width" hx-get="/services/{{ service.service_id }}" hx-indicator="#service-delete-spinner">
+      Cancel
+      <img id="service-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+  </td>
 </tr>

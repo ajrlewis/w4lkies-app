@@ -6,8 +6,8 @@
   hx-swap="innerHTML">
   <div class="row">
     <div class="four columns">
-      {% with form_field=customer_filter_form.is_active %}
-        {% include "form_field.html" %}
+      {% with field=customer_filter_form.is_active %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>

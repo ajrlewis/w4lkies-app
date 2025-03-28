@@ -1,0 +1,29 @@
+<h2>Generate an Invoice</h2>
+<form id="invoice-form" hx-target="#invoices-container" hx-post="/invoices/generate" hx-swap="innerHTML swap:100ms" hx-indicator="#invoice-form-spinner">
+  {{ invoice_generate_form.csrf_token }}
+  <div class="row">
+    <div class="four columns">
+      {% with field=invoice_generate_form.customer_id, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with field=invoice_generate_form.date_start, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with field=invoice_generate_form.date_end, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button type="submit" class="button button-primary u-half-width">
+        Generate Invoice
+        <img id="invoice-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+</form>

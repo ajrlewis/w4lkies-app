@@ -1,0 +1,23 @@
+<tr id="invoices-{{ invoice.invoice_id }}">
+  <td>{{ invoice.date_start }}</td>
+  <td>{{ invoice.date_end }}</td>
+  <td>{{ invoice.date_issued }}</td>
+  <td>{{ invoice.date_due }}</td>
+  <td>{{ invoice.date_paid }}</td>
+  <td>{{ invoice.price_subtotal }}</td>
+  <td>{{ invoice.price_discount }}</td>
+  <td>{{ invoice.price_total }}</td>
+  <td>{{ invoice.customer.name }}</td>
+  <td>{{ invoice.reference }}</td>
+  <td>
+    <!-- {% with object_type='invoices', object_id=invoice.invoice_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %} -->
+    {% with object_type='invoices', object_id=invoice.invoice_id %}
+      {% include "buttons/download.html" %}
+    {% endwith %}
+    {% with object_type='invoices', object_id=invoice.invoice_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
+  </td>
+</tr>

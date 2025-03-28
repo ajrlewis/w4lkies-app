@@ -6,18 +6,18 @@
   hx-swap="innerHTML">
   <div class="row">
     <div class="four columns">
-      {% with form_field=booking_filter_form.user_id %}
-        {% include "form_field.html" %}
+      {% with field=booking_filter_form.user_id, include_field=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="four columns">
-      {% with form_field=booking_filter_form.date_min %}
-        {% include "form_field.html" %}
+      {% with field=booking_filter_form.date_min, include_field=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="four columns">
-      {% with form_field=booking_filter_form.date_max %}
-        {% include "form_field.html" %}
+      {% with field=booking_filter_form.date_max, include_field=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>

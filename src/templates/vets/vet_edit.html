@@ -1,27 +1,27 @@
 <tr hx-trigger="cancel" class="editing" hx-get="/vets/{{ vet.vet_id }}">
-    <td>
-      {% with form_field=vet_form.name %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {% with form_field=vet_form.address %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      {% with form_field=vet_form.phone %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </td>
-    <td>
-      <button class="button-edit u-half-width" hx-put="/vets/{{ vet.vet_id }}" hx-include="closest tr" hx-indicator="#vet-save-spinner">
-        Save
-        <img id="vet-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-      </button>
-      <button class="button-delete u-half-width" hx-get="/vets/{{ vet.vet_id }}" hx-indicator="#vet-delete-spinner">
-        Cancel
-        <img id="vet-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-      </button>
-    </td>
+  <td>
+    {% with field=vet_form.name %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=vet_form.address %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=vet_form.phone %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    <button class="button-edit u-half-width" hx-put="/vets/{{ vet.vet_id }}" hx-include="closest tr" hx-indicator="#vet-save-spinner">
+      Save
+      <img id="vet-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+    <button class="button-delete u-half-width" hx-get="/vets/{{ vet.vet_id }}" hx-indicator="#vet-delete-spinner">
+      Cancel
+      <img id="vet-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+  </td>
 </tr>

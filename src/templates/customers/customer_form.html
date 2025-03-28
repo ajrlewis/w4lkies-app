@@ -3,44 +3,44 @@
   {{ customer_form.csrf_token }}
   <div class="row">
     <div class="twelve columns">
-      {% with form_field=customer_form.name %}
-        {% include "form_field.html" %}
+      {% with field=customer_form.name, include_label=True  %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>
   <div class="row">
     <div class="six columns">
-      {% with form_field=customer_form.phone %}
-        {% include "form_field.html" %}
+      {% with field=customer_form.phone, include_label=True  %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="six columns">
-      {% with form_field=customer_form.email %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="six columns">
-      {% with form_field=customer_form.emergency_contact_name %}
-        {% include "form_field.html" %}
-      {% endwith %}
-    </div>
-    <div class="six columns">
-      {% with form_field=customer_form.emergency_contact_phone %}
-        {% include "form_field.html" %}
+      {% with field=customer_form.email, include_label=True  %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>
   <div class="row">
     <div class="six columns">
-      {% with form_field=customer_form.signed_up_on %}
-        {% include "form_field.html" %}
+      {% with field=customer_form.emergency_contact_name, include_label=True  %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="six columns">
-      {% with form_field=customer_form.is_active %}
-        {% include "form_field.html" %}
+      {% with field=customer_form.emergency_contact_phone, include_label=True  %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      {% with field=customer_form.signed_up_on, include_label=True  %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {% with field=customer_form.is_active, include_label=True  %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>

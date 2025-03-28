@@ -1,0 +1,62 @@
+<tr hx-trigger="cancel" class="editing" hx-get="/invoices/{{ invoice.invoice_id }}">
+  <td>
+    {% with field=invoice_form.date_start %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.date_end %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.date_issued %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.date_due %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.date_paid %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.price_subtotal %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.price_discount %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.price_total %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.customer_id %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=invoice_form.reference %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td> 
+  <td>
+    <button class="button-edit u-half-width" hx-put="/invoices/{{ invoice.invoice_id }}" hx-include="closest tr" hx-indicator="#invoice-save-spinner">
+      Save
+      <img id="invoice-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+    <button class="button-delete u-half-width" hx-get="/invoices/{{ invoice.invoice_id }}" hx-indicator="#invoice-cancel-spinner">
+      Cancel
+      <img id="invoice-cancel-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+    </button>
+  </td>
+</tr>

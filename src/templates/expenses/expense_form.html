@@ -3,33 +3,25 @@
   {{ expense_form.csrf_token }}
   <div class="row">
     <div class="six columns">
-      {{ expense_form.date.label() }}
-      {{ expense_form.date(class_="u-full-width") }}
-      {% with errors=expense_form.date.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.date, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="six columns">
-      {{ expense_form.category.label() }}
-      {{ expense_form.category(class_="u-full-width") }}
-      {% with errors=expense_form.category.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.category, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>
   <div class="row">
     <div class="four columns">
-      {{ expense_form.price.label() }}
-      {{ expense_form.price(class_="u-full-width") }}
-      {% with errors=expense_form.price.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.price, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="eight columns">
-      {{ expense_form.description.label() }}
-      {{ expense_form.description(class_="u-full-width") }}
-      {% with errors=expense_form.description.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.description, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>

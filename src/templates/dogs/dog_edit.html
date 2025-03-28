@@ -1,57 +1,57 @@
 <tr hx-trigger="cancel" class="editing" hx-get="/dogs/{{ dog.dog_id }}">
     <td>
-      {% with form_field=dog_form.name %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.name %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.date_of_birth %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.date_of_birth %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.is_allowed_treats %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.is_allowed_treats %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.is_allowed_off_the_lead %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.is_allowed_off_the_lead %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.is_allowed_on_social_media %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.is_allowed_on_social_media %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.is_neutered_or_spayed %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.is_neutered_or_spayed %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.behavioral_issues %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.behavioral_issues %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.medical_needs %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.medical_needs %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.breed %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.breed %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.customer_id %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.customer_id %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {% with form_field=dog_form.vet_id %}
-        {% include "form_field.html" %}
+      {% with field=dog_form.vet_id %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>

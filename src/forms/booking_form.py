@@ -11,7 +11,13 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, Optional
 
-from services import customer_service, service_service, user_service, vet_service
+from services import (
+    booking_service,
+    customer_service,
+    service_service,
+    user_service,
+    vet_service,
+)
 
 
 def get_time_choices(start_hour: int, end_hour: int, interval_minutes: int):
@@ -28,6 +34,7 @@ def get_time_choices(start_hour: int, end_hour: int, interval_minutes: int):
         )
         time_choices.append(time_choice)
         current_time += time_interval
+    logger.debug(f"{time_choices = }")
     return time_choices
 
 

@@ -1,0 +1,15 @@
+<a
+  class="button button-secondary u-half-width"
+  href="/{{ object_type }}/{{ object_id }}/download">
+  Download
+  <img id="{{ object_type }}-{{ object_id }}-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</a>
+<!-- <button
+  class="button button-secondary u-half-width"
+  hx-get="/{{ object_type }}/{{ object_id }}/download"
+  hx-headers='{"X-CSRFToken": "{{ csrf_token() }}"}'
+  hx-swap="false"
+  hx-indicator="#{{ object_type }}-{{ object_id }}-download-spinner">
+  Download
+  <img id="{{ object_type }}-{{ object_id }}-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button> -->

@@ -1,22 +1,17 @@
 <form id="auth-form" hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML swap:10000ms" hx-trigger="submit" hx-indicator="#auth-form-spinner">
-  {{ auth_form.csrf_token }}
-  {% with errors=auth_form.csrf_token.errors %}
-    {% include "form_errors.html" %}
+  {% with field=auth_form.csrf_token %}
+    {% include "forms/field.html" %}
   {% endwith %}
-  <input type="hidden" name="next" value=""/>
+  <!-- <input type="hidden" name="next" value=""/> -->
   <div class="row">
     <div class="six columns">
-      {{ auth_form.email.label() }}
-      {{ auth_form.email(class_="u-full-width") }}
-      {% with errors=auth_form.email.errors %}
-        {% include "form_errors.html" %}
+      {% with field=auth_form.email, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="six columns">
-      {{ auth_form.password.label() }}
-      {{ auth_form.password(class_="u-full-width") }}
-      {% with errors=auth_form.password.errors %}
-        {% include "form_errors.html" %}
+      {% with field=auth_form.password, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>

@@ -3,19 +3,21 @@ from flask_login import login_required
 from loguru import logger
 
 from services import customer_service
-
+from services.auth_service import admin_user_required
 
 customers_bp = Blueprint("customers_bp", __name__)
 
 
 @customers_bp.route("/base", methods=["GET"])
 @login_required
+@admin_user_required
 def get_customers_base():
     return render_template("customers/customers_base.html")
 
 
 @customers_bp.route("/info", methods=["GET"])
 @login_required
+@admin_user_required
 def get_customers_info():
     customers = customer_service.get_customers()
     customer_filter_form = customer_service.get_customer_filter_form()
@@ -29,6 +31,7 @@ def get_customers_info():
 
 @customers_bp.route("/", methods=["GET"])
 @login_required
+@admin_user_required
 def get_customers():
     data = request.args.to_dict(flat=True)
     logger.debug(f"{data = }")
@@ -39,6 +42,7 @@ def get_customers():
 
 @customers_bp.route("/<int:customer_id>", methods=["GET"])
 @login_required
+@admin_user_required
 def get_customer_by_id(customer_id: int):
     customer = customer_service.get_customer_by_id(customer_id)
     logger.debug(f"{customer = }")
@@ -49,6 +53,7 @@ def get_customer_by_id(customer_id: int):
 
 @customers_bp.route("/add", methods=["GET"])
 @login_required
+@admin_user_required
 def get_customer_form():
     customer_form = customer_service.get_customer_form()
     logger.debug(f"{customer_form = }")
@@ -57,6 +62,7 @@ def get_customer_form():
 
 @customers_bp.route("/<int:customer_id>/edit", methods=["GET"])
 @login_required
+@admin_user_required
 def edit_customer(customer_id: int):
     logger.debug(f"{customer_id = }")
     customer = customer_service.get_customer_by_id(customer_id)
@@ -70,6 +76,7 @@ def edit_customer(customer_id: int):
 
 @customers_bp.route("/<int:customer_id>", methods=["PUT"])
 @login_required
+@admin_user_required
 def update_customer(customer_id: int):
     logger.debug(f"{customer_id = }")
     customer = customer_service.get_customer_by_id(customer_id)
@@ -94,6 +101,7 @@ def update_customer(customer_id: int):
 
 @customers_bp.route("/", methods=["POST"])
 @login_required
+@admin_user_required
 def add_customer():
     # Add new customer
     customer_form = customer_service.get_customer_form()
@@ -120,6 +128,7 @@ def add_customer():
 
 @customers_bp.route("/<int:customer_id>", methods=["DELETE"])
 @login_required
+@admin_user_required
 def delete_customer_by_id(customer_id: int):
     logger.debug(f"{customer_id = }")
     customer_service.delete_customer_by_id(customer_id)

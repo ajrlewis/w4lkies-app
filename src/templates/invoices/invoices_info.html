@@ -1,0 +1,11 @@
+<h2>Showing Invoices</h2>
+<button class="button button-secondary u-half-width" onclick="exportTableToCsv('invoices')" hx-indicator="#invoice-download-spinner">
+  Download Invoices
+  <img id="invoice-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
+
+<div id="invoices">
+  {% with invoices=invoices %}
+    {% include "invoices/invoices.html" %}
+  {% endwith %}
+</div>

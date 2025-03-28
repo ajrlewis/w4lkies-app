@@ -27,7 +27,8 @@ def get_booking_form(
         # booking_form.date.data = booking.date.strftime(booking_date_format)
         # booking_form.time.data = booking.time.strftime(booking_time_format)
         booking_form.date.data = booking.date
-        booking_form.time.data = booking.time
+        booking_form.time.data = booking.time.strftime("%H:%M:%S")
+        logger.debug(f"{booking_form.time.data = } {booking.time = }")
         booking_form.customer_id.data = booking.customer_id
         booking_form.service_id.data = booking.service_id
         # booking_form.invoice_id.data = booking.invoice_id
@@ -47,6 +48,7 @@ def get_booking_by_id(booking_id: int) -> Booking:
 
 def get_bookings(
     user_id: Optional[int] = None,
+    customer_id: Optional[int] = None,
     date_min: Optional[str] = None,
     date_max: Optional[str] = None,
     order_by: Optional[tuple] = (Booking.date.desc(), Booking.time.asc()),
@@ -54,10 +56,12 @@ def get_bookings(
     query = db.session.query(Booking)
     if user_id and int(user_id) > -1:
         query = query.filter(Booking.user_id == user_id)
+    if customer_id and int(customer_id) > -1:
+        query = query.filter(Booking.customer_id == customer_id)
     if date_min:
         query = query.filter(Booking.date >= date_min)
     if date_max:
-        query = query.filter(Booking.date < date_max)
+        query = query.filter(Booking.date <= date_max)
     if order_by:
         query = query.order_by(*order_by)
     bookings = query.all()
@@ -99,9 +103,10 @@ def add_booking(booking_data: dict) -> list[Booking]:
 
 
 def add_single_booking(booking_data: dict) -> Optional[Booking]:
+    time = datetime.datetime.strptime(booking_data.get("time"), booking_time_format)
     new_booking = Booking(
         date=booking_data.get("date"),
-        time=datetime.datetime.strptime(booking_data.get("time"), booking_time_format),
+        time=time,
         customer_id=booking_data.get("customer_id"),
         service_id=booking_data.get("service_id"),
         invoice_id=booking_data.get("invoice_id"),
@@ -155,7 +160,6 @@ def update_booking_by_id(booking_id: int, booking_data: dict) -> Optional[Bookin
         booking.date = date
 
     if time := booking_data.get("time"):
-        logger.debug(f"{time = }")
         booking.time = time
 
     if customer_id := booking_data.get("customer_id"):
@@ -172,7 +176,7 @@ def update_booking_by_id(booking_id: int, booking_data: dict) -> Optional[Bookin
 
     if user_id := booking_data.get("user_id"):
         logger.debug(f"{user_id = }")
-        booking.time = user_id
+        booking.user_id = user_id
 
     booking.updated_by = current_user.user_id
     booking.updated_at = datetime.datetime.now()
@@ -186,57 +190,15 @@ def update_booking_by_id(booking_id: int, booking_data: dict) -> Optional[Bookin
         return
 
 
-def delete(booking_id: int):
-    booking = get(booking_id)
-    if booking:
-        booking.delete()
-
-
-# def summary(user_id: int):
-#     logger.debug(f"{user_id = }")
-#     bookings = db.session.query(Booking).filter_by(user_id=user_id)
-#     summary_data = [
-#         {
-#             "user_name": b.user.name,
-#             "booking_year": b.date.year,
-#             "booking_month_number": b.date.month,
-#             "booking_month": b.date.strftime("%b"),
-#             "booking_price": b.service.price,
-#             "booking_duration": b.service.duration,
-#         }
-#         for b in bookings
-#     ]
-#     logger.debug(f"{summary_data = }")
-
-#     summary_df = pd.DataFrame(summary_data)
-#     summary_gb = summary_df.groupby(
-#         ["user_name", "booking_year", "booking_month_number"]
-#     )
-#     summary_df = summary_gb.agg(
-#         booking_month=("booking_month", "min"),
-#         number_of_bookings=("booking_price", len),
-#         total_price_of_bookings=("booking_price", "sum"),
-#         total_duration_of_bookings=("booking_duration", "sum"),
-#     ).reset_index()
-#     summary_df = summary_df.drop(columns="booking_month_number")
-
-#     summary_df["total_duration_of_bookings"] // 60
-#     summary_df["total_duration_of_bookings_hours"] = (
-#         summary_df["total_duration_of_bookings"] // 60
-#     )
-#     (
-#         summary_df["total_duration_of_bookings"] / 60
-#         - summary_df["total_duration_of_bookings_hours"]
-#     ) * 60
-#     summary_df["total_duration_of_bookings_minutes"] = (
-#         summary_df["total_duration_of_bookings"] / 60
-#         - summary_df["total_duration_of_bookings_hours"]
-#     ) * 60
-#     summary_df["total_duration_of_bookings"] = (
-#         summary_df["total_duration_of_bookings_hours"].astype(str)
-#         + " hrs "
-#         + summary_df["total_duration_of_bookings_minutes"].astype(str)
-#         + " mins"
-#     )
-
-#     logger.debug(summary_df)
+def delete_booking_by_id(booking_id: int) -> None:
+    booking = get_booking_by_id(booking_id)
+    logger.debug(f"{booking = }")
+    if booking is not None:
+        try:
+            db.session.delete(booking)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            logger.error(f"Failed to delete booking: {e}")
+    else:
+        logger.error(f"Booking with ID {booking_id} does not exist")

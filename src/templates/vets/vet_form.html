@@ -3,18 +3,18 @@
   {{ vet_form.csrf_token }}
   <div class="row">
     <div class="four columns">
-      {% with form_field=vet_form.name %}
-        {% include "form_field.html" %}
+      {% with field=vet_form.name, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="four columns">
-      {% with form_field=vet_form.address %}
-        {% include "form_field.html" %}
+      {% with field=vet_form.address, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
     <div class="four columns">
-      {% with form_field=vet_form.phone %}
-        {% include "form_field.html" %}
+      {% with field=vet_form.phone, include_label=True %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </div>
   </div>

@@ -1,26 +1,22 @@
 <tr hx-trigger="cancel" class="editing" hx-get="/expenses/{{ expense.expense_id }}">
     <td>
-      {{ expense_form.date(class_="u-full-width") }}
-      {% with errors=expense_form.date.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.date %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.category(class_="u-full-width") }}
-      {% with errors=expense_form.category.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.category %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.price(class_="u-full-width") }}
-      {% with errors=expense_form.price.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.price %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>
-      {{ expense_form.description(class_="u-full-width") }}
-      {% with errors=expense_form.description.errors %}
-        {% include "form_errors.html" %}
+      {% with field=expense_form.description %}
+        {% include "forms/field.html" %}
       {% endwith %}
     </td>
     <td>

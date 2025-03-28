@@ -1,37 +1,37 @@
 <tr hx-trigger="cancel" class="editing" hx-get="/customers/{{ customer.customer_id }}">
   <td>
-    {% with form_field=customer_form.name %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.name %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=customer_form.phone %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.phone %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=customer_form.email %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.email %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=customer_form.emergency_contact_name %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.emergency_contact_name %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=customer_form.emergency_contact_phone %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.emergency_contact_phone %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=customer_form.signed_up_on %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.signed_up_on %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=customer_form.is_active %}
-      {% include "form_field.html" %}
+    {% with field=customer_form.is_active %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>

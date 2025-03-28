@@ -6,16 +6,19 @@
   hx-swap="innerHTML">
   <div class="row">
     <div class="four columns">
-      {{ expense_filter_form.from_date.label() }}
-      {{ expense_filter_form.from_date(class_="u-full-width") }}
+      {% with field=expense_filter_form.from_date, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
     </div>
     <div class="four columns">
-      {{ expense_filter_form.to_date.label() }}
-      {{ expense_filter_form.to_date(class_="u-full-width") }}
+      {% with field=expense_filter_form.to_date, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
     </div>
     <div class="four columns">
-      {{ expense_filter_form.category.label() }}
-      {{ expense_filter_form.category(class_="u-full-width") }}
+      {% with field=expense_filter_form.category, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
     </div>
   </div>
 </form>

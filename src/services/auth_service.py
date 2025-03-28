@@ -4,10 +4,17 @@ from flask_login import login_user, logout_user
 from loguru import logger
 from werkzeug.security import check_password_hash
 
+from functools import wraps
+
+from flask import render_template
+from flask_login import current_user
+from loguru import logger
+
 from app import login_manager
 from forms.auth_form import AuthForm
 from models.user import User
 from services import user_service
+
 
 login_manager.login_view = "auth_bp.base"
 login_manager.login_message_category = "error"
@@ -26,6 +33,25 @@ def load_user(user_id: int):
 def get_auth_form() -> AuthForm:
     auth_form = AuthForm()
     return auth_form
+
+
+def admin_user_required(f):
+    @wraps(f)
+    def _admin_user_required(*args, **kwargs):
+        is_admin = current_user.is_admin
+        # is_admin = False
+        if is_admin:
+            return f(*args, **kwargs)
+        else:
+            code = 403
+            status = "Forbidden"
+            message = "The current user does not have permissions to view this page."
+            logger.error(message)
+            return render_template(
+                "error.html", code=code, status=status, message=message
+            )
+
+    return _admin_user_required
 
 
 def sign_in_user(email: str, password: str) -> Optional[User]:

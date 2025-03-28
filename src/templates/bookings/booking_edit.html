@@ -1,27 +1,27 @@
 <tr hx-trigger="cancel" class="editing" hx-get="/bookings/{{ booking.booking_id }}">
   <td>
-    {% with form_field=booking_form.date %}
-      {% include "form_field.html" %}
+    {% with field=booking_form.date %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=booking_form.time %}
-      {% include "form_field.html" %}
+    {% with field=booking_form.time %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=booking_form.user_id %}
-      {% include "form_field.html" %}
+    {% with field=booking_form.user_id %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=booking_form.customer_id %}
-      {% include "form_field.html" %}
+    {% with field=booking_form.customer_id %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>
-    {% with form_field=booking_form.service_id %}
-      {% include "form_field.html" %}
+    {% with field=booking_form.service_id %}
+      {% include "forms/field.html" %}
     {% endwith %}
   </td>
   <td>

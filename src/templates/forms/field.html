@@ -1,0 +1,7 @@
+{% if include_label %}
+  {{ field.label() }}
+{% endif %}
+{{ field(class_="u-full-width") }}
+{% with errors=field.errors %}
+  {% include "forms/errors.html" %}
+{% endwith %}

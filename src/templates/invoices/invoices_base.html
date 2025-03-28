@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Invoices</h1>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button button-primary u-half-width"
+        hx-get="/invoices/generate"
+        hx-target="#invoices-container"
+        hx-swap="innerHTML"
+        hx-indicator="#add-invoice-spinner"
+        >
+        Generate Invoice
+        <img id="add-invoice-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button button-primary u-half-width"
+        hx-get="/invoices/info"
+        hx-target="#invoices-container"
+        hx-swap="innerHTML"
+        hx-indicator="#invoice-info-spinner"
+        >
+        Invoice Info
+        <img id="invoice-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="invoices-container"></div>
+  <br>
+  <br>
+  <br>
+</div>

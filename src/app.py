@@ -52,6 +52,7 @@ def create_app(Config) -> Flask:
         from blueprints.dogs_bp import dogs_bp
         from blueprints.services_bp import services_bp
         from blueprints.bookings_bp import bookings_bp
+        from blueprints.invoices_bp import invoices_bp
         from blueprints.expenses_bp import expenses_bp
 
         app.register_blueprint(index_bp, url_prefix="/")
@@ -61,6 +62,7 @@ def create_app(Config) -> Flask:
         app.register_blueprint(dogs_bp, url_prefix="/dogs")
         app.register_blueprint(services_bp, url_prefix="/services")
         app.register_blueprint(bookings_bp, url_prefix="/bookings")
+        app.register_blueprint(invoices_bp, url_prefix="/invoices")
         app.register_blueprint(expenses_bp, url_prefix="/expenses")
 
         # Request Handling
