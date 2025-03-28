@@ -2,7 +2,7 @@
   {% with field=auth_form.csrf_token %}
     {% include "forms/field.html" %}
   {% endwith %}
-  <!-- <input type="hidden" name="next" value=""/> -->
+  <input type="hidden" name="next" value=""/>
   <div class="row">
     <div class="six columns">
       {% with field=auth_form.email, include_label=True %}

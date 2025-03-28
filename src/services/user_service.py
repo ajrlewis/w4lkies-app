@@ -13,11 +13,20 @@ def get_password_hash(password: str) -> str:
     return password_hash
 
 
-def get_user_form(user: Optional[User] = None) -> UserForm:
+def get_user_form(
+    user: Optional[User] = None, ignore_request_data: bool = False
+) -> UserForm:
     logger.debug(f"{user = }")
-    user_form = UserForm(obj=None)
+    if ignore_request_data:
+        logger.debug(f"{ignore_request_data = }")
+        user_form = UserForm(formdata=None)
+    else:
+        user_form = UserForm()
     if user:
-        user_form.set_data_from_model(user)
+        user_form.name.data = user.name
+        user_form.email.data = user.email
+        user_form.is_admin.data = user.is_admin
+        user_form.is_active.data = user.is_active
     return user_form
 
 
@@ -35,6 +44,7 @@ def get_users(
     name: Optional[str] = None,
     email: Optional[str] = None,
     is_admin: Optional[bool] = None,
+    is_active: Optional[bool] = None,
     sort_by: str = "name",
     sort_order: str = "asc",
 ) -> list[User]:
@@ -44,9 +54,14 @@ def get_users(
     if name:
         logger.debug(f"{name = }")
         query = query.filter(User.name.ilike(f"%{name}%"))
+
     if email:
         logger.debug(f"{email = }")
-        query = query.filter(Company.email.ilike(f"%{email}%"))
+        query = query.filter(User.email.ilike(f"%{email}%"))
+
+    if is_active is not None:
+        logger.debug(f"{is_active = }")
+        query = query.filter(User.is_active == is_active)
 
     # Apply sorting
     if sort_by == "name":
@@ -85,14 +100,23 @@ def update_user_by_id(user_id: int, user_data: dict) -> Optional[User]:
         logger.debug(f"{name = }")
         user.name = name
 
+    if password := user_data.get("password"):
+        logger.debug(f"{name = }")
+        user.password_hash = generate_password_hash(password, method="scrypt")
+
     if email := user_data.get("email"):
         logger.debug(f"{email = }")
         user.email = email
 
-    is_admin = user_data.get("is_admin")
-    if is_admin is not None:
-        logger.debug(f"{is_admin = }")
-        user.is_admin = is_admin
+    # is_admin = user_data.get("is_admin")
+    # if is_admin is not None:
+    #     logger.debug(f"{is_admin = }")
+    #     user.is_admin = is_admin
+
+    is_active = user_data.get("is_active")
+    if is_active is not None:
+        logger.debug(f"{is_active = }")
+        user.is_active = is_active
 
     try:
         db.session.commit()
@@ -104,12 +128,17 @@ def update_user_by_id(user_id: int, user_data: dict) -> Optional[User]:
 
 
 def add_user(user_data: dict) -> Optional[User]:
+    logger.debug(f"{user_data = }")
     new_user = User(
         name=user_data.get("name"),
         email=user_data.get("email"),
-        password=generate_password_hash(user_data.get("password"), method="scrypt"),
+        password_hash=generate_password_hash(
+            user_data.get("password"), method="scrypt"
+        ),
         is_admin=False,
+        is_active=user_data.get("is_active"),
     )
+    logger.debug(new_user)
     try:
         db.session.add(new_user)
         db.session.commit()

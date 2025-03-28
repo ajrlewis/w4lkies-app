@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Users</h1>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button class="button button-primary u-half-width"
+        hx-get="/users/add"
+        hx-target="#users-container"
+        hx-swap="innerHTML"
+        hx-indicator="#add-user-spinner"
+        >
+        Add User
+        <img id="add-user-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button button-primary u-half-width"
+        hx-get="/users/info"
+        hx-target="#users-container"
+        hx-swap="innerHTML"
+        hx-indicator="#user-info-spinner"
+        >
+        User Info
+        <img id="user-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="users-container"></div>
+  <br>
+  <br>
+  <br>
+</div>

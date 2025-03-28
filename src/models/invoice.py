@@ -9,7 +9,7 @@ class Invoice(db.Model):
     date_start = db.Column(db.Date, nullable=False)
     date_end = db.Column(db.Date, nullable=False)
     date_issued = db.Column(db.Date, nullable=False)
-    date_due = db.Column(db.Date, nullable=False)
+    date_due = db.Column(db.Date, nullable=True)
     date_paid = db.Column(db.Date, nullable=True)
 
     price_subtotal = db.Column(db.Float, nullable=False)

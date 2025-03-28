@@ -31,11 +31,6 @@ class UserForm(FlaskForm):
 
     is_admin = BooleanField("Admin", validators=[Optional()])
 
-    # password = PasswordField(
-    #     "Password",
-    #     validators=[DataRequired()],
-    #     render_kw={"placeholder": "*****", "class": "u-full-width"},
-    # )
     password = PasswordField(
         "Password",
         validators=[
@@ -48,3 +43,5 @@ class UserForm(FlaskForm):
         ],
         render_kw={"placeholder": "Enter your password", "autocomplete": "off"},
     )
+
+    is_active = BooleanField("Active", validators=[Optional()])

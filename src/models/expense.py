@@ -13,4 +13,3 @@ class Expense(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=True)
     created_by = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=True)
     updated_at = db.Column(db.DateTime, nullable=True)
-    updated_by = db.Column(db.Integer, db.ForeignKey("user.user_id"), nullable=True)

@@ -1,0 +1,42 @@
+<h2>Add an User</h2>
+<form id="user-form" hx-post="/users/" hx-swap="outerHTML" hx-indicator="#user-form-spinner">
+  {{ user_form.csrf_token }}
+  <div class="row">
+    <div class="six columns">
+      {% with field=user_form.name, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <div class="six columns">
+      {% with field=user_form.email, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="four columns">
+      {% with field=user_form.password, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with field=user_form.is_admin, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <div class="four columns">
+      {% with field=user_form.is_active, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="twelve columns">
+      <button type="submit" class="button button-primary u-half-width">
+        Add User
+        <img id="user-form-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </div>
+  </div>
+</form>

@@ -24,7 +24,13 @@ login_manager.login_message_category = "error"
 def load_user(user_id: int):
     try:
         user = user_service.get_user_by_id(int(user_id))
+        logger.debug(f"{user = }")
         return user
+        # if user.is_active:
+        #     return user
+        # else:
+        #     logger.error(f"User is not active.")
+        #     raise ValueError(f"User is not active.")
     except Exception as e:
         logger.error(f"Unable to load user: {e}")
         return False
@@ -39,7 +45,6 @@ def admin_user_required(f):
     @wraps(f)
     def _admin_user_required(*args, **kwargs):
         is_admin = current_user.is_admin
-        # is_admin = False
         if is_admin:
             return f(*args, **kwargs)
         else:

@@ -1,0 +1,37 @@
+<tr hx-trigger="cancel" class="editing" hx-get="/users/{{ user.user_id }}">
+  <td>
+    {% with field=user_form.name %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=user_form.email %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=user_form.password %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=user_form.is_admin %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+    {% with field=user_form.is_active %}
+      {% include "forms/field.html" %}
+    {% endwith %}
+  </td>
+  <td>
+  <button class="button-edit u-half-width" hx-put="/users/{{ user.user_id }}" hx-include="closest tr" hx-indicator="#user-save-spinner">
+    Save
+    <img id="user-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+  </button>
+  <button class="button-delete u-half-width" hx-get="/users/{{ user.user_id }}" hx-indicator="#user-delete-spinner">
+    Cancel
+    <img id="user-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+  </button>
+  </td>
+</tr>

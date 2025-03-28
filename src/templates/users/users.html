@@ -1,0 +1,20 @@
+<table class="table u-full-width">
+  <!-- <caption> -->
+    <!-- Showing {{ users | length }} users. -->
+  <!-- </caption> -->
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Admin</th>
+      <th>Active</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody hx-target="closest tr" hx-swap="outerHTML">
+    {% for user in users %}
+      {% include "users/user_detail.html" %}
+    {% endfor %}
+  </tbody>
+</table>

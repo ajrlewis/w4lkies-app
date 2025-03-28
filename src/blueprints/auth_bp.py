@@ -25,10 +25,11 @@ def sign_in():
         password = auth_form.password.data
 
         user = auth_service.sign_in_user(email, password)
+        logger.debug(f"User is signed in: {user = }")
         if not user:
             logger.error("User does not exist or password is incorrect")
             auth_form.email.errors = ["Email does not exist"]
-            # auth_form.password.errors = ["Password not correct"]
+            auth_form.password.errors = ["Password not correct"]
             logger.debug(f"{auth_form.errors = }")
             return render_template("auth_form.html", auth_form=auth_form), 422
 
@@ -46,6 +47,7 @@ def sign_in():
 
 @auth_bp.route("/authenticated", methods=["GET"])
 def authenticated():
+    logger.debug(f"{current_user = } {current_user.is_authenticated = }")
     return jsonify({"authenticated": current_user.is_authenticated})
 
 

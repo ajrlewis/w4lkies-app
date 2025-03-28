@@ -1,6 +1,7 @@
 <a
   class="button button-secondary u-half-width"
-  href="/{{ object_type }}/{{ object_id }}/download">
+  href="/{{ object_type }}/{{ object_id }}/download"
+  hx-indicator="#{{ object_type }}-{{ object_id }}-download-spinner">
   Download
   <img id="{{ object_type }}-{{ object_id }}-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
 </a>

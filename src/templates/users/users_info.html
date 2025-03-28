@@ -1,0 +1,11 @@
+<h2>Showing Users</h2>
+<button class="button button-secondary u-half-width" onclick="exportTableToCsv('Users')" hx-indicator="#user-download-spinner">
+  Download Users
+  <img id="user-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+</button>
+
+<div id="users">
+  {% with users=users %}
+    {% include "users/users.html" %}
+  {% endwith %}
+</div>

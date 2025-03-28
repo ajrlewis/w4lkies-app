@@ -1,0 +1,16 @@
+<tr id="users-{{ user.user_id }}">
+  <td>{{ user.name }}</td>
+  <td>{{ user.email }}</td>
+  <!-- <td>{{ user.password_hash }}</td> -->
+  <td>********</td>
+  <td>{{ user.is_admin }}</td>
+  <td>{{ user.is_active }}</td>
+  <td>
+    {% with object_type='users', object_id=user.user_id %}
+      {% include "buttons/edit.html" %}
+    {% endwith %}
+    {% with object_type='users', object_id=user.user_id %}
+      {% include "buttons/delete.html" %}
+    {% endwith %}
+  </td>
+</tr>

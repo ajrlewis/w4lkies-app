@@ -47,6 +47,7 @@ def create_app(Config) -> Flask:
         # Register application routes.
         from blueprints.index_bp import index_bp
         from blueprints.auth_bp import auth_bp
+        from blueprints.users_bp import users_bp
         from blueprints.customers_bp import customers_bp
         from blueprints.vets_bp import vets_bp
         from blueprints.dogs_bp import dogs_bp
@@ -57,6 +58,7 @@ def create_app(Config) -> Flask:
 
         app.register_blueprint(index_bp, url_prefix="/")
         app.register_blueprint(auth_bp, url_prefix="/auth")
+        app.register_blueprint(users_bp, url_prefix="/users")
         app.register_blueprint(customers_bp, url_prefix="/customers")
         app.register_blueprint(vets_bp, url_prefix="/vets")
         app.register_blueprint(dogs_bp, url_prefix="/dogs")
