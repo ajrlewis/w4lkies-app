@@ -167,7 +167,6 @@ def _create(invoice):
         table.drawOn(pdf, x, y)
         # Add the subtotal and total on the last chunk of services.
         if i == number_of_chunks - 1:
-            invoice.price_discount = 10
             pdf.setFillColor(colors.black)
             x -= 0.75 * inch
             x += 4.8 * inch
