@@ -26,20 +26,15 @@ def sign_in():
 
         user = auth_service.sign_in_user(email, password)
         logger.debug(f"User is signed in: {user = }")
-        if not user:
+        if user:
+            logger.debug("redirecting to index.")
+            return redirect(url_for("index_bp.get"))
+        else:
             logger.error("User does not exist or password is incorrect")
             auth_form.email.errors = ["Email does not exist"]
             auth_form.password.errors = ["Password not correct"]
             logger.debug(f"{auth_form.errors = }")
             return render_template("auth_form.html", auth_form=auth_form), 422
-
-        # next_page = request.form.get("next")
-        # if next_page:
-        #     logger.debug(f"Redirecting to {next_page = }")
-        #     return redirect(next_page)
-        # else:
-        #     return redirect(url_for("index_bp.get"))
-        return redirect(url_for("index_bp.get"))
     else:
         logger.error(f"Sign-in form did not validate: {auth_form.errors}")
         return render_template("auth_form.html", auth_form=auth_form), 422
@@ -47,8 +42,15 @@ def sign_in():
 
 @auth_bp.route("/authenticated", methods=["GET"])
 def authenticated():
-    logger.debug(f"{current_user = } {current_user.is_authenticated = }")
-    return jsonify({"authenticated": current_user.is_authenticated})
+    logger.debug(
+        f"{current_user = } {current_user.is_authenticated = } {current_user.is_active = }"
+    )
+    return jsonify(
+        {
+            "authenticated": current_user.is_authenticated,
+            "active": current_user.is_active,
+        }
+    )
 
 
 @auth_bp.route("/refresh-csrf-token", methods=["GET"])
