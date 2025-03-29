@@ -38,7 +38,7 @@ def get_invoice_generate_form(ignore_request_data: bool = False) -> InvoiceGener
 def get_invoices() -> list[Invoice]:
     # Generate query
     query = db.session.query(Invoice)
-    # .order_by(Invoice.name.desc())
+    query = query.order_by(Invoice.date_issued.desc())
     invoices = query.all()
     logger.debug(f"{invoices = }")
     return invoices
@@ -116,6 +116,7 @@ def update_invoice_by_id(invoice_id: int, invoice_data: dict) -> Optional[Invoic
 
 def add_invoice(invoice_data: dict) -> Optional[Invoice]:
     new_invoice = Invoice(
+        invoice_id=invoice_data.get("invoice_id"),
         reference=invoice_data.get("reference"),
         date_start=invoice_data.get("date_start"),
         date_end=invoice_data.get("date_end"),
@@ -126,8 +127,11 @@ def add_invoice(invoice_data: dict) -> Optional[Invoice]:
         price_discount=invoice_data.get("price_discount"),
         price_total=invoice_data.get("price_total"),
         customer_id=invoice_data.get("customer_id"),
-        bookings=invoice_data.get("bookings"),
-        created_by=current_user.user_id,
+        # bookings=invoice_data.get("bookings", []),
+        created_at=invoice_data.get("created_at"),
+        created_by=invoice_data.get("created_by"),
+        updated_at=invoice_data.get("updated_at"),
+        updated_by=invoice_data.get("updated_by"),
     )
     try:
         db.session.add(new_invoice)

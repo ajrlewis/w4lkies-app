@@ -129,11 +129,15 @@ def update_expense_by_id(expense_id: int, expense_data: dict) -> Optional[Expens
 
 def add_expense(expense_data: dict) -> Optional[Expense]:
     new_expense = Expense(
+        expense_id=expense_data.get("expense_id"),
         date=expense_data.get("date"),
         category=expense_data.get("category"),
         price=expense_data.get("price"),
         description=expense_data.get("description"),
-        created_by=current_user.user_id,
+        created_at=expense_data.get("created_at"),
+        created_by=expense_data.get("created_by"),
+        updated_at=expense_data.get("updated_at"),
+        updated_by=expense_data.get("updated_by"),
     )
     try:
         db.session.add(new_expense)

@@ -1,8 +1,5 @@
 <form id="auth-form" hx-target="#auth-form" hx-post="/auth/sign-in" hx-swap="outerHTML swap:10000ms" hx-trigger="submit" hx-indicator="#auth-form-spinner">
-  {% with field=auth_form.csrf_token %}
-    {% include "forms/field.html" %}
-  {% endwith %}
-  <input type="hidden" name="next" value=""/>
+  <input type="hidden" name="next" value="/"/>
   <div class="row">
     <div class="six columns">
       {% with field=auth_form.email, include_label=True %}

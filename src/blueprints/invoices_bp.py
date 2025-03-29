@@ -17,14 +17,14 @@ invoices_bp = Blueprint("invoices_bp", __name__)
 
 @invoices_bp.route("/base", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def get_invoices_base():
     return render_template("invoices/invoices_base.html")
 
 
 @invoices_bp.route("/info", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def get_invoices_info():
     invoices = invoice_service.get_invoices()
     invoice_generate_form = invoice_service.get_invoice_generate_form()
@@ -38,7 +38,7 @@ def get_invoices_info():
 
 @invoices_bp.route("/", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def get_invoices():
     data = request.args.to_dict(flat=True)
     logger.debug(f"{data = }")
@@ -49,7 +49,7 @@ def get_invoices():
 
 @invoices_bp.route("/<int:invoice_id>", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def get_invoice_by_id(invoice_id: int):
     invoice = invoice_service.get_invoice_by_id(invoice_id)
     logger.debug(f"{invoice = }")
@@ -60,7 +60,7 @@ def get_invoice_by_id(invoice_id: int):
 
 @invoices_bp.route("/generate", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def get_invoice_form():
     invoice_generate_form = invoice_service.get_invoice_generate_form()
     logger.debug(f"{invoice_generate_form = }")
@@ -72,7 +72,7 @@ def get_invoice_form():
 
 @invoices_bp.route("/<int:invoice_id>/edit", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def edit_invoice(invoice_id: int):
     logger.debug(f"{invoice_id = }")
     invoice = invoice_service.get_invoice_by_id(invoice_id)
@@ -86,7 +86,7 @@ def edit_invoice(invoice_id: int):
 
 @invoices_bp.route("/<int:invoice_id>", methods=["PUT"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def update_invoice(invoice_id: int):
     logger.debug(f"{invoice_id = }")
     invoice = invoice_service.get_invoice_by_id(invoice_id)
@@ -111,7 +111,7 @@ def update_invoice(invoice_id: int):
 
 @invoices_bp.route("/generate", methods=["POST"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def generate_invoice():
     # Add new invoice
     invoice_generate_form = invoice_service.get_invoice_generate_form()
@@ -141,7 +141,7 @@ def generate_invoice():
 
 @invoices_bp.route("/<int:invoice_id>/download", methods=["GET"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def download_invoice_by_id(invoice_id: int):
     logger.debug(f"{invoice_id = }")
     result = invoice_service.download_invoice_by_id(invoice_id)
@@ -157,7 +157,7 @@ def download_invoice_by_id(invoice_id: int):
 
 @invoices_bp.route("/<int:invoice_id>", methods=["DELETE"])
 @login_required
-@admin_user_required
+# @admin_user_required
 def delete_invoice_by_id(invoice_id: int):
     logger.debug(f"{invoice_id = }")
     invoice_service.delete_invoice_by_id(invoice_id)

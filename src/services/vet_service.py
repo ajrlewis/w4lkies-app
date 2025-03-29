@@ -73,10 +73,10 @@ def update_vet_by_id(vet_id: int, vet_data: dict) -> Optional[Vet]:
 
 def add_vet(vet_data: dict) -> Optional[Vet]:
     new_vet = Vet(
+        vet_id=vet_data.get("vet_id"),
         name=vet_data.get("name"),
         address=vet_data.get("address"),
         phone=vet_data.get("phone"),
-        created_by=current_user.user_id,
     )
     try:
         db.session.add(new_vet)

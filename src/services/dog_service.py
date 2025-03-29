@@ -113,6 +113,7 @@ def update_dog_by_id(dog_id: int, dog_data: dict) -> Optional[Dog]:
 
 def add_dog(dog_data: dict) -> Optional[Dog]:
     new_dog = Dog(
+        dog_id=dog_data.get("dog_id"),
         name=dog_data.get("name"),
         date_of_birth=dog_data.get("date_of_birth"),
         is_allowed_treats=dog_data.get("is_allowed_treats"),
@@ -124,7 +125,10 @@ def add_dog(dog_data: dict) -> Optional[Dog]:
         breed=dog_data.get("breed"),
         customer_id=dog_data.get("customer_id"),
         vet_id=dog_data.get("vet_id"),
-        created_by=current_user.user_id,
+        created_at=dog_data.get("created_at"),
+        created_by=dog_data.get("created_by"),
+        updated_at=dog_data.get("updated_at"),
+        updated_by=dog_data.get("updated_by"),
     )
     try:
         db.session.add(new_dog)

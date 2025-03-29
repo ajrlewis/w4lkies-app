@@ -70,6 +70,10 @@ def update_vet(vet_id: int):
     logger.debug(f"{vet_form = }")
     if vet_form.validate_on_submit():
         vet_data = vet_form.data
+        vet_data = vet_data | {
+            "updated_at": datetime.datetime.utcnow(),
+            "updated_by": current_user.user_id,
+        }
         logger.debug(f"{vet_data = }")
         vet = vet_service.update_vet_by_id(vet_id, vet_data)
         return render_template("vets/vet_detail.html", vet=vet)
@@ -92,7 +96,7 @@ def add_vet():
     vet_form = vet_service.get_vet_form()
     if vet_form.validate_on_submit():
         vet_data = vet_form.data
-        # vet_data = vet_data | {"created_by": current_user.user_id}
+        vet_data = vet_data | {"created_by": current_user.user_id}
         logger.debug(f"{vet_data = }")
         vet = vet_service.add_vet(vet_data=vet_data)
         logger.debug(f"{vet = }")

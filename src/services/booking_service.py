@@ -105,13 +105,15 @@ def add_booking(booking_data: dict) -> list[Booking]:
 def add_single_booking(booking_data: dict) -> Optional[Booking]:
     time = datetime.datetime.strptime(booking_data.get("time"), booking_time_format)
     new_booking = Booking(
+        booking_id=booking_data.get("booking_id"),
         date=booking_data.get("date"),
         time=time,
         customer_id=booking_data.get("customer_id"),
         service_id=booking_data.get("service_id"),
         invoice_id=booking_data.get("invoice_id"),
         user_id=booking_data.get("user_id"),
-        created_by=current_user.user_id,
+        created_at=booking_data.get("created_at"),
+        created_by=booking_data.get("created_by"),
     )
     try:
         db.session.add(new_booking)

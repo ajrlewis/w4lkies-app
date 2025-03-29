@@ -110,6 +110,7 @@ def update_customer_by_id(customer_id: int, customer_data: dict) -> Optional[Cus
 
 def add_customer(customer_data: dict) -> Optional[Customer]:
     new_customer = Customer(
+        customer_id=customer_data.get("customer_id"),
         name=customer_data.get("name"),
         phone=customer_data.get("phone"),
         email=customer_data.get("email"),
@@ -117,7 +118,10 @@ def add_customer(customer_data: dict) -> Optional[Customer]:
         emergency_contact_phone=customer_data.get("emergency_contact_phone"),
         signed_up_on=customer_data.get("signed_up_on"),
         is_active=customer_data.get("is_active"),
-        created_by=current_user.user_id,
+        created_at=customer_data.get("created_at"),
+        created_by=customer_data.get("created_by"),
+        updated_at=customer_data.get("updated_at"),
+        updated_by=customer_data.get("updated_by"),
     )
     try:
         db.session.add(new_customer)

@@ -80,8 +80,11 @@ def update_service_by_id(service_id: int, service_data: dict) -> Optional[Servic
     if is_active is not None:
         service.is_active = is_active
 
-    service.updated_by = current_user.user_id
-    service.updated_at = datetime.datetime.now()
+    if updated_at := service_data.get("updated_at"):
+        service.updated_at = updated_at
+
+    if updated_by := service_data.get("updated_by"):
+        service.updated_by = updated_by
 
     try:
         db.session.commit()
@@ -94,13 +97,17 @@ def update_service_by_id(service_id: int, service_data: dict) -> Optional[Servic
 
 def add_service(service_data: dict) -> Optional[Service]:
     new_service = Service(
+        service_id=service_data.get("service_id"),
         name=service_data.get("name"),
         price=service_data.get("price"),
         description=service_data.get("description"),
         duration=service_data.get("duration"),
         is_publicly_offered=service_data.get("is_publicly_offered"),
         is_active=service_data.get("is_active"),
-        created_by=current_user.user_id,
+        created_at=service_data.get("created_at"),
+        created_by=service_data.get("created_by"),
+        updated_at=service_data.get("updated_at"),
+        updated_by=service_data.get("updated_by"),
     )
     try:
         db.session.add(new_service)

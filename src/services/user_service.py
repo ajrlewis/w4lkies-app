@@ -130,11 +130,10 @@ def update_user_by_id(user_id: int, user_data: dict) -> Optional[User]:
 def add_user(user_data: dict) -> Optional[User]:
     logger.debug(f"{user_data = }")
     new_user = User(
+        user_id=user_data.get("user_id"),
         name=user_data.get("name"),
         email=user_data.get("email"),
-        password_hash=generate_password_hash(
-            user_data.get("password"), method="scrypt"
-        ),
+        password_hash=user_data.get("password_hash"),
         is_admin=False,
         is_active=user_data.get("is_active"),
     )
@@ -148,6 +147,15 @@ def add_user(user_data: dict) -> Optional[User]:
         logger.error(f"Error adding user: {e}")
         db.session.rollback()
         return
+
+
+def generate_user(user_data: dict) -> Optional[User]:
+    logger.debug(f"{user_data = }")
+    user_data["password_hash"] = generate_password_hash(
+        user_data.get("password"), method="scrypt"
+    )
+    new_user = add_user(user_data)
+    return new_user
 
 
 def delete_user_by_id(user_id: int) -> None:
