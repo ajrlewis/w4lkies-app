@@ -2,7 +2,6 @@ import datetime
 from typing import Optional
 
 from loguru import logger
-from flask_login import current_user
 from sqlalchemy import asc, desc, func
 
 from app import db
@@ -59,8 +58,13 @@ def update_vet_by_id(vet_id: int, vet_data: dict) -> Optional[Vet]:
         logger.debug(f"{phone = }")
         vet.phone = phone
 
-    vet.updated_by = current_user.user_id
-    vet.updated_at = datetime.datetime.now()
+    if updated_by := vet_data.get("updated_by"):
+        logger.debug(f"{updated_by = }")
+        vet.updated_by = updated_by
+
+    if updated_at := vet_data.get("updated_at"):
+        logger.debug(f"{updated_at = }")
+        vet.updated_at = updated_at
 
     try:
         db.session.commit()
@@ -77,6 +81,8 @@ def add_vet(vet_data: dict) -> Optional[Vet]:
         name=vet_data.get("name"),
         address=vet_data.get("address"),
         phone=vet_data.get("phone"),
+        created_at=vet_data.get("created_at"),
+        created_by=vet_data.get("created_by"),
     )
     try:
         db.session.add(new_vet)

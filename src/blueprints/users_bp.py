@@ -1,5 +1,7 @@
+import datetime
+
 from flask import Blueprint, render_template, Response, request, send_from_directory
-from flask_login import login_required
+from flask_login import current_user, login_required
 from loguru import logger
 
 from services import user_service
@@ -70,6 +72,10 @@ def update_user(user_id: int):
     logger.debug(f"{user_form = }")
     if user_form.validate_on_submit():
         user_data = user_form.data
+        user_data = user_data | {
+            "updated_at": datetime.datetime.utcnow(),
+            "updated_by": current_user.user_id,
+        }
         logger.debug(f"{user_data = }")
         user = user_service.update_user_by_id(user_id, user_data)
         return render_template("users/user_detail.html", user=user)
@@ -92,9 +98,10 @@ def add_user():
     user_form = user_service.get_user_form()
     if user_form.validate_on_submit():
         user_data = user_form.data
-        # user_data = user_data | {"created_by": current_user.user_id}
+        user_data = user_data | {"created_by": current_user.user_id}
         logger.debug(f"{user_data = }")
-        user = user_service.add_user(user_data=user_data)
+        # user = user_service.add_user(user_data=user_data)
+        user = user_service.generate_user(user_data=user_data)
         logger.debug(f"{user = }")
     else:
         logger.error(f"{user_form.errors = }")

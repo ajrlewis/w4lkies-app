@@ -1,7 +1,7 @@
 import datetime
 
 from flask import Blueprint, render_template, Response, request, send_from_directory
-from flask_login import login_required
+from flask_login import login_required, current_user
 from loguru import logger
 
 from services import customer_service

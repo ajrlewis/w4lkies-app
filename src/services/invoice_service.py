@@ -3,7 +3,6 @@ import hashlib
 from typing import Optional
 
 from loguru import logger
-from flask_login import current_user
 from sqlalchemy import asc, desc, func
 
 from app import db
@@ -102,8 +101,13 @@ def update_invoice_by_id(invoice_id: int, invoice_data: dict) -> Optional[Invoic
         logger.debug(f"{bookings = }")
         invoice.bookings = bookings
 
-    invoice.updated_by = current_user.user_id
-    invoice.updated_at = datetime.datetime.now()
+    if updated_by := invoice_data.get("updated_by"):
+        logger.debug(f"{updated_by = }")
+        invoice.updated_by = updated_by
+
+    if updated_at := invoice_data.get("updated_at"):
+        logger.debug(f"{updated_at = }")
+        invoice.updated_at = updated_at
 
     try:
         db.session.commit()
@@ -148,6 +152,7 @@ def generate_invoice(invoice_data: dict) -> Optional[Invoice]:
     customer_id = invoice_data["customer_id"]
     date_start = invoice_data["date_start"]
     date_end = invoice_data["date_end"]
+    created_by = invoice_data["created_by"]
 
     # Get unique reference for invoice
     reference_hash = (
@@ -184,6 +189,7 @@ def generate_invoice(invoice_data: dict) -> Optional[Invoice]:
         "price_total": price_total,
         "customer_id": customer_id,
         "bookings": bookings,
+        "created_by": created_by,
     }
     new_invoice = add_invoice(new_invoice_data)
     logger.info(f"{new_invoice = }")

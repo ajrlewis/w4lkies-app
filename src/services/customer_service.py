@@ -96,8 +96,13 @@ def update_customer_by_id(customer_id: int, customer_data: dict) -> Optional[Cus
         logger.debug(f"{is_active = }")
         customer.is_active = is_active
 
-    customer.updated_by = current_user.user_id
-    customer.updated_at = datetime.datetime.now()
+    if updated_by := customer_data.get("updated_by"):
+        logger.debug(f"{updated_by = }")
+        customer.updated_by = updated_by
+
+    if updated_at := customer_data.get("updated_at"):
+        logger.debug(f"{updated_at = }")
+        customer.updated_at = updated_at
 
     try:
         db.session.commit()

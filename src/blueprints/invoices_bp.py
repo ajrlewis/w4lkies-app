@@ -1,3 +1,5 @@
+import datetime
+
 from flask import (
     Blueprint,
     render_template,
@@ -6,7 +8,7 @@ from flask import (
     send_file,
     send_from_directory,
 )
-from flask_login import login_required
+from flask_login import current_user, login_required
 from loguru import logger
 
 from services import invoice_service
@@ -94,6 +96,10 @@ def update_invoice(invoice_id: int):
     logger.debug(f"{invoice_form = }")
     if invoice_form.validate_on_submit():
         invoice_data = invoice_form.data
+        invoice_data = invoice_data | {
+            "updated_at": datetime.datetime.utcnow(),
+            "updated_by": current_user.user_id,
+        }
         logger.debug(f"{invoice_data = }")
         invoice = invoice_service.update_invoice_by_id(invoice_id, invoice_data)
         return render_template("invoices/invoice_detail.html", invoice=invoice)
@@ -117,6 +123,7 @@ def generate_invoice():
     invoice_generate_form = invoice_service.get_invoice_generate_form()
     if invoice_generate_form.validate_on_submit():
         invoice_data = invoice_generate_form.data
+        invoice_data = invoice_data | {"created_by": current_user.user_id}
         logger.debug(f"{invoice_data = }")
         invoice = invoice_service.generate_invoice(invoice_data=invoice_data)
         logger.debug(f"{invoice = }")

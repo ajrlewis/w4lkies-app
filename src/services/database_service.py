@@ -65,7 +65,16 @@ def dump_database() -> str:
 
 import importlib
 
-table_names = ["user", "customer", "vet", "dog", "service", "invoice", "booking"]
+table_names = [
+    "user",
+    "customer",
+    "vet",
+    "dog",
+    "service",
+    "invoice",
+    "booking",
+    "expense",
+]
 table_names = ["expense"]
 
 

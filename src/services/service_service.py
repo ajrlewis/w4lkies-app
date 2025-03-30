@@ -2,7 +2,6 @@ import datetime
 from typing import Optional
 
 from loguru import logger
-from flask_login import current_user
 from sqlalchemy import asc, desc, func
 
 from app import db

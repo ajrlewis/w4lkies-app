@@ -1,5 +1,7 @@
+import datetime
+
 from flask import Blueprint, render_template, Response, request, send_from_directory
-from flask_login import login_required
+from flask_login import current_user, login_required
 from loguru import logger
 
 from services import dog_service
@@ -70,6 +72,10 @@ def update_dog(dog_id: int):
     logger.debug(f"{dog_form = }")
     if dog_form.validate_on_submit():
         dog_data = dog_form.data
+        dog_data = dog_data | {
+            "updated_at": datetime.datetime.utcnow(),
+            "updated_by": current_user.user_id,
+        }
         logger.debug(f"{dog_data = }")
         dog = dog_service.update_dog_by_id(dog_id, dog_data)
         return render_template("dogs/dog_detail.html", dog=dog)
@@ -92,7 +98,7 @@ def add_dog():
     dog_form = dog_service.get_dog_form()
     if dog_form.validate_on_submit():
         dog_data = dog_form.data
-        # dog_data = dog_data | {"created_by": current_user.user_id}
+        dog_data = dog_data | {"created_by": current_user.user_id}
         logger.debug(f"{dog_data = }")
         dog = dog_service.add_dog(dog_data=dog_data)
         logger.debug(f"{dog = }")

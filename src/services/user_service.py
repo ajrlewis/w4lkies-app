@@ -118,6 +118,14 @@ def update_user_by_id(user_id: int, user_data: dict) -> Optional[User]:
         logger.debug(f"{is_active = }")
         user.is_active = is_active
 
+    if updated_by := user_data.get("updated_by"):
+        logger.debug(f"{updated_by = }")
+        user.updated_by = updated_by
+
+    if updated_at := user_data.get("updated_at"):
+        logger.debug(f"{updated_at = }")
+        user.updated_at = updated_at
+
     try:
         db.session.commit()
         return user
@@ -136,6 +144,10 @@ def add_user(user_data: dict) -> Optional[User]:
         password_hash=user_data.get("password_hash"),
         is_admin=False,
         is_active=user_data.get("is_active"),
+        created_by=user_data.get("created_by"),
+        created_at=user_data.get("created_at"),
+        updated_by=user_data.get("updated_by"),
+        updated_at=user_data.get("updated_at"),
     )
     logger.debug(new_user)
     try:
@@ -150,10 +162,10 @@ def add_user(user_data: dict) -> Optional[User]:
 
 
 def generate_user(user_data: dict) -> Optional[User]:
-    logger.debug(f"{user_data = }")
     user_data["password_hash"] = generate_password_hash(
         user_data.get("password"), method="scrypt"
     )
+    logger.debug(f"{user_data = }")
     new_user = add_user(user_data)
     return new_user
 

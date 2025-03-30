@@ -2,7 +2,6 @@ import datetime
 from typing import Optional
 
 from loguru import logger
-from flask_login import current_user
 from sqlalchemy import asc, desc, func
 
 from app import db
@@ -99,8 +98,8 @@ def update_dog_by_id(dog_id: int, dog_data: dict) -> Optional[Dog]:
         logger.debug(f"{vet_id = }")
         dog.vet_id = vet_id
 
-    dog.updated_by = current_user.user_id
-    dog.updated_at = datetime.datetime.now()
+    # dog.updated_by = current_user.user_id
+    # dog.updated_at = datetime.datetime.now()
 
     try:
         db.session.commit()

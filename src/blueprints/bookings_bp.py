@@ -1,5 +1,7 @@
+import datetime
+
 from flask import Blueprint, render_template, Response, request, send_from_directory
-from flask_login import login_required
+from flask_login import current_user, login_required
 from loguru import logger
 
 from services import booking_service
@@ -18,6 +20,7 @@ def get_bookings_base():
 @login_required
 def get_bookings_info():
     bookings = booking_service.get_bookings()
+    bookings = bookings[:50]
     booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
     return render_template(
@@ -33,6 +36,7 @@ def get_bookings():
     data = request.args.to_dict(flat=True)
     logger.debug(f"{data = }")
     bookings = booking_service.get_bookings(**data)
+    bookings = bookings[:50]
     logger.debug(f"{bookings = }")
     return render_template("bookings/bookings.html", bookings=bookings)
 
@@ -77,6 +81,10 @@ def update_booking(booking_id: int):
     logger.debug(f"{booking_form = }")
     if booking_form.validate_on_submit():
         booking_data = booking_form.data
+        booking_data = booking_data | {
+            "updated_at": current_user.user_id,
+            "updated_by": datetime.datetime.utcnow(),
+        }
         logger.debug(f"{booking_data = }")
         booking = booking_service.update_booking_by_id(booking_id, booking_data)
         return render_template("bookings/booking_detail.html", booking=booking)
@@ -99,6 +107,7 @@ def add_booking():
     booking_form = booking_service.get_booking_form()
     if booking_form.validate_on_submit():
         booking_data = booking_form.data
+        booking_data = booking_data | {"created_by": current_user.user_id}
         logger.debug(f"{booking_data = }")
         bookings = booking_service.add_booking(booking_data=booking_data)
         logger.debug(f"{bookings = }")

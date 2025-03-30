@@ -115,8 +115,13 @@ def update_expense_by_id(expense_id: int, expense_data: dict) -> Optional[Expens
         logger.debug(f"{description = }")
         expense.description = description
 
-    expense.updated_by = current_user.user_id
-    expense.updated_at = datetime.datetime.now()
+    if updated_by := expense_data.get("updated_by"):
+        logger.debug(f"{updated_by = }")
+        expense.updated_by = updated_by
+
+    if updated_at := expense_data.get("updated_at"):
+        logger.debug(f"{updated_at = }")
+        expense.updated_at = updated_at
 
     try:
         db.session.commit()

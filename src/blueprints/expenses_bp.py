@@ -1,5 +1,7 @@
+import datetime
+
 from flask import Blueprint, render_template, Response, request, send_from_directory
-from flask_login import login_required
+from flask_login import current_user, login_required
 from loguru import logger
 
 from services import expense_service
@@ -77,6 +79,10 @@ def update_expense(expense_id: int):
     logger.debug(f"{expense_form = }")
     if expense_form.validate_on_submit():
         expense_data = expense_form.data
+        expense_data = expense_data | {
+            "updated_at": datetime.datetime.utcnow(),
+            "updated_by": current_user.user_id,
+        }
         logger.debug(f"{expense_data = }")
         expense = expense_service.update_expense_by_id(expense_id, expense_data)
         return render_template("expenses/expense_detail.html", expense=expense)
@@ -97,7 +103,7 @@ def add_expense():
     expense_form = expense_service.get_expense_form()
     if expense_form.validate_on_submit():
         expense_data = expense_form.data
-        # expense_data = expense_data | {"created_by": current_user.user_id}
+        expense_data = expense_data | {"created_by": current_user.user_id}
         logger.debug(f"{expense_data = }")
         expense = expense_service.add_expense(expense_data=expense_data)
         logger.debug(f"{expense = }")
