@@ -6,6 +6,7 @@ from loguru import logger
 
 from services import booking_service
 
+max_bookings = 50
 
 bookings_bp = Blueprint("bookings_bp", __name__)
 
@@ -20,11 +21,41 @@ def get_bookings_base():
 @login_required
 def get_bookings_info():
     bookings = booking_service.get_bookings()
-    bookings = bookings[:50]
+    bookings = bookings[:max_bookings]
     booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
     return render_template(
         "bookings/bookings_info.html",
+        bookings=bookings,
+        booking_filter_form=booking_filter_form,
+    )
+
+
+@bookings_bp.route("/info/past", methods=["GET"])
+@login_required
+def get_past_bookings_info():
+    data = request.args.to_dict(flat=True)
+    booking_filter_form = booking_service.get_booking_filter_form()
+    bookings = booking_service.get_past_bookings()
+    bookings = bookings[:max_bookings]
+    logger.debug(f"{bookings = }")
+    return render_template(
+        "bookings/bookings_info_past.html",
+        bookings=bookings,
+        booking_filter_form=booking_filter_form,
+    )
+
+
+@bookings_bp.route("/info/future", methods=["GET"])
+@login_required
+def get_future_bookings_info():
+    data = request.args.to_dict(flat=True)
+    booking_filter_form = booking_service.get_booking_filter_form()
+    bookings = booking_service.get_future_bookings()
+    bookings = bookings[:max_bookings]
+    logger.debug(f"{bookings = }")
+    return render_template(
+        "bookings/bookings_info_future.html",
         bookings=bookings,
         booking_filter_form=booking_filter_form,
     )

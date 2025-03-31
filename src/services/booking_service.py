@@ -68,6 +68,28 @@ def get_bookings(
     return bookings
 
 
+def get_past_bookings(user_id: Optional[int] = None, customer_id: Optional[int] = None):
+    bookings = get_bookings(
+        user_id=user_id,
+        customer_id=customer_id,
+        date_max=datetime.datetime.now(),
+        order_by=(Booking.date.desc(), Booking.time.asc()),
+    )
+    return bookings
+
+
+def get_future_bookings(
+    user_id: Optional[int] = None, customer_id: Optional[int] = None
+):
+    bookings = get_bookings(
+        user_id=user_id,
+        customer_id=customer_id,
+        date_min=datetime.datetime.now(),
+        order_by=(Booking.date.asc(), Booking.time.asc()),
+    )
+    return bookings
+
+
 def get_booking_datetime(booking: Booking):
     datetime_string = " ".join(
         [
