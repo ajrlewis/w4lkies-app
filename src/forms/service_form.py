@@ -48,7 +48,7 @@ class ServiceForm(FlaskForm):
     )
 
     is_active = BooleanField(
-        "Is still active?",
+        "Is active?",
         validators=[Optional()],
         default=True,
     )

@@ -25,6 +25,18 @@
       {% endwith %}
     </div>
   </div>
+  <div class="row">
+    <div class="twelve columns">
+      {% with field=service_form.is_active, include_label=True %}
+        {% include "forms/field.html" %}
+      {% endwith %}
+    </div>
+    <!-- <div class="six columns"> -->
+      <!-- {% with field=service_form.is_publicly_offered, include_label=True %} -->
+        <!-- {% include "forms/field.html" %} -->
+      <!-- {% endwith %} -->
+    <!-- </div> -->
+  </div>
   <br>
   <div class="row">
     <div class="twelve columns">
