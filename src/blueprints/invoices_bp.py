@@ -146,6 +146,16 @@ def generate_invoice():
     )
 
 
+# @invoices_bp.route("/<int:invoice_id/regenerate", methods=["POST"])
+# @login_required
+# # @admin_user_required
+# def regenerate_invoice(invoice_id: int):
+#     # Add new invoice
+#     invoice = regenerate_invoice_by_id(invoice_id, updated_by=current_user.user_id)
+#     logger.debug(f"{invoice = }")
+#     return render_template()
+
+
 @invoices_bp.route("/<int:invoice_id>/download", methods=["GET"])
 @login_required
 # @admin_user_required
