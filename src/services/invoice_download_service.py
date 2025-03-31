@@ -148,9 +148,11 @@ def _create(invoice):
         )
         table_data = [table_header]
         for booking in bookings:
+            booking_date = booking.date
+            booking_time = booking.time.strftime("%I:%M %p")
             table_data.append(
                 [
-                    f"{booking.date} {booking.time}",
+                    f"{booking_date} {booking_time}",
                     booking.service.name,
                     f"{booking.service.price:.2f}",
                 ]
@@ -179,12 +181,11 @@ def _create(invoice):
             pdf.setStrokeColor(theme_color_3)
             pdf.setLineWidth(6)
             pdf.line(x, y, x + dx, y)
-            y -= small_skip
-            y -= 0.175 * inch
-            text = f"Subtotal: {currency}{invoice.price_subtotal:.2f}"
-            pdf.drawString(x, y, text)
-
             if invoice.price_discount > 0.0:
+                y -= small_skip
+                y -= 0.175 * inch
+                text = f"Subtotal: {currency}{invoice.price_subtotal:.2f}"
+                pdf.drawString(x, y, text)
                 y -= small_skip
                 text = f"Discount: {currency}{invoice.price_discount:.2f}"
                 pdf.drawString(x, y, text)
