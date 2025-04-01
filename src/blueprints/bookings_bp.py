@@ -31,13 +31,13 @@ def get_bookings_info():
     )
 
 
+# @bookings_bp.route("/past/base", methods=["GET"])
 @bookings_bp.route("/info/past", methods=["GET"])
 @login_required
-def get_past_bookings_info():
-    data = request.args.to_dict(flat=True)
-    booking_filter_form = booking_service.get_booking_filter_form()
+def get_bookings_info_past():
     bookings = booking_service.get_past_bookings()
     bookings = bookings[:max_bookings]
+    booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
     return render_template(
         "bookings/bookings_info_past.html",
@@ -46,13 +46,23 @@ def get_past_bookings_info():
     )
 
 
+@bookings_bp.route("/past", methods=["GET"])
+@login_required
+def get_past_bookings():
+    data = request.args.to_dict(flat=True)
+    logger.debug(f"{data = }")
+    bookings = booking_service.get_past_bookings(**data)
+    bookings = bookings[:max_bookings]
+    logger.debug(f"{bookings = }")
+    return render_template("bookings/bookings.html", bookings=bookings)
+
+
 @bookings_bp.route("/info/future", methods=["GET"])
 @login_required
-def get_future_bookings_info():
-    data = request.args.to_dict(flat=True)
-    booking_filter_form = booking_service.get_booking_filter_form()
+def get_bookings_info_future():
     bookings = booking_service.get_future_bookings()
     bookings = bookings[:max_bookings]
+    booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
     return render_template(
         "bookings/bookings_info_future.html",
@@ -61,15 +71,26 @@ def get_future_bookings_info():
     )
 
 
-@bookings_bp.route("/", methods=["GET"])
+@bookings_bp.route("/future", methods=["GET"])
 @login_required
-def get_bookings():
+def get_future_bookings():
     data = request.args.to_dict(flat=True)
     logger.debug(f"{data = }")
-    bookings = booking_service.get_bookings(**data)
-    bookings = bookings[:50]
+    bookings = booking_service.get_future_bookings(**data)
+    bookings = bookings[:max_bookings]
     logger.debug(f"{bookings = }")
     return render_template("bookings/bookings.html", bookings=bookings)
+
+
+# @bookings_bp.route("/", methods=["GET"])
+# @login_required
+# def get_bookings():
+#     data = request.args.to_dict(flat=True)
+#     logger.debug(f"{data = }")
+#     bookings = booking_service.get_bookings(**data)
+#     bookings = bookings[:50]
+#     logger.debug(f"{bookings = }")
+#     return render_template("bookings/bookings.html", bookings=bookings)
 
 
 @bookings_bp.route("/<int:booking_id>", methods=["GET"])

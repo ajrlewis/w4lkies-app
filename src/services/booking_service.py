@@ -68,7 +68,9 @@ def get_bookings(
     return bookings
 
 
-def get_past_bookings(user_id: Optional[int] = None, customer_id: Optional[int] = None):
+def get_past_bookings(
+    user_id: Optional[int] = None, customer_id: Optional[int] = None, **kwargs
+):
     bookings = get_bookings(
         user_id=user_id,
         customer_id=customer_id,
@@ -79,7 +81,7 @@ def get_past_bookings(user_id: Optional[int] = None, customer_id: Optional[int] 
 
 
 def get_future_bookings(
-    user_id: Optional[int] = None, customer_id: Optional[int] = None
+    user_id: Optional[int] = None, customer_id: Optional[int] = None, **kwargs
 ):
     bookings = get_bookings(
         user_id=user_id,
