@@ -61,7 +61,7 @@ def get_bookings(
     if date_min:
         query = query.filter(Booking.date >= date_min)
     if date_max:
-        query = query.filter(Booking.date <= date_max)
+        query = query.filter(Booking.date < date_max)
     if order_by:
         query = query.order_by(*order_by)
     bookings = query.all()
