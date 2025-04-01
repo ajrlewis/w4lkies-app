@@ -1,3 +1,3 @@
-# flask_vercel_template
+# w4lkies_app
 
-A Flask full-stack template for Vercel.
+A Flask and HTMX application for w4lkies.
