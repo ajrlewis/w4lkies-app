@@ -16,19 +16,19 @@
         hx-get="/bookings/info/future"
         hx-target="#bookings-container"
         hx-swap="innerHTML"
-        hx-indicator="#booking-info-spinner"
+        hx-indicator="#booking-future-spinner"
         >
         Future Bookings
-        <img id="booking-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+        <img id="booking-future-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
       </button>
       <button class="button button-primary u-half-width"
         hx-get="/bookings/info/past"
         hx-target="#bookings-container"
         hx-swap="innerHTML"
-        hx-indicator="#booking-info-spinner"
+        hx-indicator="#booking-past-spinner"
         >
         Past Bookings
-        <img id="booking-info-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+        <img id="booking-past-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
       </button>
     </div>
   </div>

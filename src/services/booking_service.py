@@ -84,7 +84,7 @@ def get_future_bookings(
     bookings = get_bookings(
         user_id=user_id,
         customer_id=customer_id,
-        date_min=datetime.datetime.now(),
+        date_min=datetime.datetime.now().date(),
         order_by=(Booking.date.asc(), Booking.time.asc()),
     )
     return bookings
