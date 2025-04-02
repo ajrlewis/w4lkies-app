@@ -13,7 +13,7 @@ from loguru import logger
 from app import login_manager
 from forms.auth_form import AuthForm
 from models.user import User
-from services import user_service
+from services import email_service, user_service
 
 
 login_manager.login_view = "auth_bp.base"
@@ -24,13 +24,8 @@ login_manager.login_message_category = "error"
 def load_user(user_id: int):
     try:
         user = user_service.get_user_by_id(int(user_id))
-        logger.debug(f"{user = }")
+        logger.debug(f"{user = } {user.is_active = }")
         return user
-        # if user.is_active:
-        #     return user
-        # else:
-        #     logger.error(f"User is not active.")
-        #     raise ValueError(f"User is not active.")
     except Exception as e:
         logger.error(f"Unable to load user: {e}")
         return False
@@ -69,6 +64,7 @@ def sign_in_user(email: str, password: str) -> Optional[User]:
         logger.error(f"User password incorrect!")
         return
     login_user(user, remember=True)
+    email_service.send_user_sign_in_notification(user)
     return user
 
 

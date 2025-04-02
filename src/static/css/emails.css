@@ -1,0 +1,43 @@
+.container {
+  color: #1a1a1a;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin-left: 14px;
+  margin-right: 14px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+table {
+  font-weight: normal;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+tr {
+}
+
+td {
+  vertical-align: top;
+  padding-bottom: 10px;
+  width: 100%;
+}
+

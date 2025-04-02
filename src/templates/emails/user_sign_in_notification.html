@@ -1,0 +1,19 @@
+{% extends "emails/base.html" %}
+
+{% block main %}
+  <p>
+  This is just a friendly email to let you know that your account was successfully signed into.
+  <p>
+  <table>
+    <tr><td style="font-weight: bold;">User Name:</td></tr>
+    <tr><td>{{ user.name }}</td></tr>
+    <tr><td style="font-weight: bold;">User Email:</td></tr>
+    <tr><td>{{ user.email }}</td></tr>
+    <tr><td style="font-weight: bold;">Sign In At:</td></tr>
+    <tr><td>{{ now }}</dt></tr>
+    <tr><td style="font-weight: bold;">IP Address:</td></tr>
+    <tr><td>{{ ip_address }}</td></tr>
+    <tr><td style="font-weight: bold;">User Agent:</td></tr>
+    <tr><td>{{ user_agent }}</td></tr>
+  </table>
+{% endblock main %}

@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 from flask import Blueprint, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
@@ -23,11 +23,9 @@ def sign_in():
     if auth_form.validate_on_submit():
         email = auth_form.email.data
         password = auth_form.password.data
-
         user = auth_service.sign_in_user(email, password)
-        logger.debug(f"User is signed in: {user = }")
         if user:
-            logger.debug("redirecting to index.")
+            logger.debug(f"User is signed in: {user = }")
             return redirect(url_for("index_bp.get"))
         else:
             logger.error("User does not exist or password is incorrect")
