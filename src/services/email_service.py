@@ -34,13 +34,12 @@ def send(
     recipient: str,
     subject: str,
     html: str,
+    bcc: list = [],
     attachments: Optional[list] = None,
 ):
     try:
         recipients = [recipient]
         logger.debug(f"{recipients = }")
-        bcc = [mail.username]
-        logger.debug(f"{bcc = }")
         body = html2text.html2text(html)
         logger.debug(f"{body = }")
         message = Message(
