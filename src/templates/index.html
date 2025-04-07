@@ -15,20 +15,30 @@
 {% block nav %}
 <div class="container">
   <ul>
-    <li><a hx-get="/users/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/users" href="#" hx-trigger="click">Users</a></li>
+    {% if current_user.is_admin %}
+      <li><a hx-get="/users/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/users" href="#" hx-trigger="click">Users</a></li>
+    {% endif %}
     <li><a hx-get="/customers/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/customers" href="#" hx-trigger="click">Customers</a></li>
     <li><a hx-get="/vets/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/vets" href="#" hx-trigger="click">Vets</a></li>
     <li><a hx-get="/dogs/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/dogs" href="#" hx-trigger="click">Dogs</a></li>
-    <li><a hx-get="/services/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/services" href="#" hx-trigger="click">Services</a></li>
+    {% if current_user.is_admin %}
+      <li><a hx-get="/services/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/services" href="#" hx-trigger="click">Services</a></li>
+    {% endif %}
     <li><a hx-get="/bookings/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/bookings" href="#" hx-trigger="click">Bookings</a></li>
-    <li><a hx-get="/invoices/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/invoices" href="#" hx-trigger="click">Invoices</a></li>
-    <li><a hx-get="/expenses/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/expenses" href="#" hx-trigger="click">Expenses</a></li>
-    <!-- <li><a hx-get="/income_statements/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/income_statement" href="#" hx-trigger="click">Income Statement</a></li> -->
+    {% if current_user.is_admin %}
+      <li><a hx-get="/invoices/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/invoices" href="#" hx-trigger="click">Invoices</a></li>
+      <li><a hx-get="/expenses/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/expenses" href="#" hx-trigger="click">Expenses</a></li>
+      <li><a hx-get="/income_statements/base" hx-target="#root" hx-swap="innerHTML" hx-push-url="/income_statement" href="#" hx-trigger="click">Income Statement</a></li>
+    {% endif %}
     <li><a href="/auth/sign-out">Sign Out</a></li>
   </ul>
 </div>
 {% endblock nav %}
 
 {% block main %}
-<div id="root"></div>
+<div id="root">
+  <div class="container">
+    <p>Select a link above to manage your data</p>
+  </div>
+</div>
 {% endblock main %}
