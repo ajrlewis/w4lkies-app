@@ -1,27 +1,29 @@
-<h2>Filter Bookings</h2>
-<form id="booking-filter-form"
-  hx-get="/bookings/future"
-  hx-target="#bookings"
-  hx-trigger="change"
-  hx-swap="innerHTML">
-  <div class="row">
-    <div class="four columns">
-      {% with field=booking_filter_form.user_id, include_label=True %}
-        {% include "forms/field.html" %}
-      {% endwith %}
+{% if current_user.is_admin %}
+  <h2>Filter Bookings</h2>
+  <form id="booking-filter-form"
+    hx-get="/bookings/future"
+    hx-target="#bookings"
+    hx-trigger="change"
+    hx-swap="innerHTML">
+    <div class="row">
+      <div class="four columns">
+        {% with field=booking_filter_form.user_id, include_label=True %}
+          {% include "forms/field.html" %}
+        {% endwith %}
+      </div>
+      <div class="four columns">
+        {% with field=booking_filter_form.date_min, include_label=True %}
+          {% include "forms/field.html" %}
+        {% endwith %}
+      </div>
+      <div class="four columns">
+        {% with field=booking_filter_form.date_max, include_label=True %}
+          {% include "forms/field.html" %}
+        {% endwith %}
+      </div>
     </div>
-    <div class="four columns">
-      {% with field=booking_filter_form.date_min, include_label=True %}
-        {% include "forms/field.html" %}
-      {% endwith %}
-    </div>
-    <div class="four columns">
-      {% with field=booking_filter_form.date_max, include_label=True %}
-        {% include "forms/field.html" %}
-      {% endwith %}
-    </div>
-  </div>
-</form>
+  </form>
+{% endif %}
 
 <h2>Showing Bookings</h2>
 <button class="button button-secondary u-half-width" onclick="exportTableToCsv('Bookings')" hx-indicator="#booking-download-spinner">

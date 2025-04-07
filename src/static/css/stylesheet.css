@@ -72,11 +72,25 @@
   margin-right: 5px;
 }
 
+.active {
+/*  background-color: #f2f2f2;*/
+  background-color: var(--background-dark-color);
+  color: var(--text-light-color);
+}
+
 table {
   display: block;
   overflow-x: auto;
   white-space: nowrap;
 }
+
+/*table tr:nth-child(even) {
+  background-color: ;
+}
+
+table tr:nth-child(odd) {
+  background-color: #ffffff;
+}*/
 
 .scrollable-table {
   overflow-x: auto;

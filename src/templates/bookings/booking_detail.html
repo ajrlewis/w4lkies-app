@@ -1,15 +1,23 @@
-<tr id="bookings-{{ booking.booking_id }}">
+{% if booking.date == current_date %}
+  {% set class="active" %}
+{% endif %}
+
+<tr id="bookings-{{ booking.booking_id }}" class="{{ class }}">
   <td>{{ booking.date }}</td>
   <td>{{ booking.time }}</td>
-  <td>{{ booking.user.name }}</td>
+  {% if current_user.is_admin %}
+    <td>{{ booking.user.name }}</td>
+  {% endif %}
   <td>{{ booking.customer.name }}</td>
   <td>{{ booking.service.name }}</td>
-  <td>
-    {% with object_type='bookings', object_id=booking.booking_id %}
-      {% include "buttons/edit.html" %}
-    {% endwith %}
-    {% with object_type='bookings', object_id=booking.booking_id %}
-      {% include "buttons/delete.html" %}
-    {% endwith %}
-  </td>
+  {% if current_user.is_admin %}
+    <td>
+      {% with object_type='bookings', object_id=booking.booking_id %}
+        {% include "buttons/edit.html" %}
+      {% endwith %}
+      {% with object_type='bookings', object_id=booking.booking_id %}
+        {% include "buttons/delete.html" %}
+      {% endwith %}
+    </td>
+  {% endif %}
 </tr>

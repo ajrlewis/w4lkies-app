@@ -20,7 +20,10 @@ def get_bookings_base():
 @bookings_bp.route("/info", methods=["GET"])
 @login_required
 def get_bookings_info():
-    bookings = booking_service.get_bookings()
+    user_id = None
+    if not current_user.is_admin:
+        user_id = current_user.user_id
+    bookings = booking_service.get_bookings(user_id=user_id)
     bookings = bookings[:max_bookings]
     booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
@@ -35,7 +38,10 @@ def get_bookings_info():
 @bookings_bp.route("/info/past", methods=["GET"])
 @login_required
 def get_bookings_info_past():
-    bookings = booking_service.get_past_bookings()
+    user_id = None
+    if not current_user.is_admin:
+        user_id = current_user.user_id
+    bookings = booking_service.get_bookings(user_id=user_id)
     bookings = bookings[:max_bookings]
     booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
@@ -50,6 +56,8 @@ def get_bookings_info_past():
 @login_required
 def get_past_bookings():
     data = request.args.to_dict(flat=True)
+    if not current_user.is_admin:
+        data = data | {"user_id": current_user.user_id}
     logger.debug(f"{data = }")
     bookings = booking_service.get_past_bookings(**data)
     bookings = bookings[:max_bookings]
@@ -60,7 +68,10 @@ def get_past_bookings():
 @bookings_bp.route("/info/future", methods=["GET"])
 @login_required
 def get_bookings_info_future():
-    bookings = booking_service.get_future_bookings()
+    user_id = None
+    if not current_user.is_admin:
+        user_id = current_user.user_id
+    bookings = booking_service.get_future_bookings(user_id=user_id)
     bookings = bookings[:max_bookings]
     booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
@@ -75,6 +86,8 @@ def get_bookings_info_future():
 @login_required
 def get_future_bookings():
     data = request.args.to_dict(flat=True)
+    if not current_user.is_admin:
+        data = data | {"user_id": current_user.user_id}
     logger.debug(f"{data = }")
     bookings = booking_service.get_future_bookings(**data)
     bookings = bookings[:max_bookings]

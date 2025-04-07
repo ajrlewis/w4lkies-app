@@ -1,3 +1,4 @@
+import datetime
 import os
 import sys
 
@@ -56,6 +57,8 @@ def create_app(Config) -> Flask:
         from blueprints.invoices_bp import invoices_bp
         from blueprints.expenses_bp import expenses_bp
 
+        # from blueprints.income_statement_bp import income_statement_bp
+
         app.register_blueprint(index_bp, url_prefix="/")
         app.register_blueprint(auth_bp, url_prefix="/auth")
         app.register_blueprint(users_bp, url_prefix="/users")
@@ -66,6 +69,12 @@ def create_app(Config) -> Flask:
         app.register_blueprint(bookings_bp, url_prefix="/bookings")
         app.register_blueprint(invoices_bp, url_prefix="/invoices")
         app.register_blueprint(expenses_bp, url_prefix="/expenses")
+        # app.register_blueprint(income_statement_bp, url_prefix="/income_statement")
+
+        # Context Handling
+        @app.context_processor
+        def handle_context():
+            return {"current_date": datetime.datetime.utcnow().date()}
 
         # Request Handling
         @app.before_request
