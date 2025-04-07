@@ -37,7 +37,7 @@ def get_customer_filter_form() -> CustomerFilterForm:
 
 def get_customers(is_active: Optional[bool] = None) -> list:
     # Generate query
-    query = db.session.query(Customer).order_by(Customer.name.desc())
+    query = db.session.query(Customer).order_by(Customer.name.asc())
 
     # Filer customers
     if is_active and is_active != "All":

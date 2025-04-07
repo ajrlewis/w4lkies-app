@@ -6,10 +6,14 @@
     <tr>
       <th>Date</th>
       <th>Time</th>
-      <th>User</th>
+      {% if current_user.is_admin %}
+        <th>User</th>
+      {% endif %}
       <th>Customer</th>
       <th>Service</th>
-      <th>Actions</th>
+      {% if current_user.is_admin %}
+        <th>Actions</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody hx-target="closest tr" hx-swap="outerHTML">

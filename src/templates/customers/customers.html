@@ -9,9 +9,11 @@
       <th>Email</th>
       <th>Emergency Contact Name</th>
       <th>Emergency Contact Phone</th>
-      <th>Signed Up On</th>
-      <th>Active</th>
-      <th>Actions</th>
+      {% if current_user.is_admin %}
+        <th>Signed Up On</th>
+        <th>Active</th>
+        <th>Actions</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody hx-target="closest tr" hx-swap="outerHTML">

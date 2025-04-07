@@ -1,23 +1,28 @@
-<h2>Filter Customers</h2>
-<form id="customer-filter-form"
-  hx-get="/customers"
-  hx-target="#customers"
-  hx-trigger="change"
-  hx-swap="innerHTML">
-  <div class="row">
-    <div class="four columns">
-      {% with field=customer_filter_form.is_active %}
-        {% include "forms/field.html" %}
-      {% endwith %}
+{% if current_user.is_admin %}
+  <h2>Filter Customers</h2>
+  <form id="customer-filter-form"
+    hx-get="/customers"
+    hx-target="#customers"
+    hx-trigger="change"
+    hx-swap="innerHTML">
+    <div class="row">
+      <div class="four columns">
+        {% with field=customer_filter_form.is_active, include_label=True %}
+          {% include "forms/field.html" %}
+        {% endwith %}
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+{% endif %}
 
 <h2>Showing Customers</h2>
-<button class="button button-secondary u-half-width" onclick="exportTableToCsv('Customers')" hx-indicator="#customer-download-spinner">
-  Download Customers
-  <img id="customer-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-</button>
+
+{% if current_user.is_admin %}
+  <button class="button button-secondary u-half-width" onclick="exportTableToCsv('Customers')" hx-indicator="#customer-download-spinner">
+    Download Customers
+    <img id="customer-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+  </button>
+{% endif %}
 
 <div id="customers">
   {% with customers=customers %}

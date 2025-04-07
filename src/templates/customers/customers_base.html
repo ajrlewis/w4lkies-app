@@ -3,16 +3,20 @@
   <br>
   <div class="row">
     <div class="twelve columns">
-      <button class="button button-primary u-half-width"
-        hx-get="/customers/add"
-        hx-target="#customers-container"
-        hx-swap="innerHTML"
-        hx-indicator="#add-customer-spinner"
-        >
-        Add Customer
-        <img id="add-customer-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-      </button>
-      <button class="button button-primary u-half-width"
+      {% if current_user.is_admin %}
+        <button class="button button-primary u-half-width"
+          hx-get="/customers/add"
+          hx-target="#customers-container"
+          hx-swap="innerHTML"
+          hx-indicator="#add-customer-spinner"
+          >
+          Add Customer
+          <img id="add-customer-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+        </button>
+      {% endif %}
+      <button
+        id="customer-info-button"
+        class="button button-primary u-half-width"
         hx-get="/customers/info"
         hx-target="#customers-container"
         hx-swap="innerHTML"
