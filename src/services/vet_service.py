@@ -26,7 +26,7 @@ def get_vet_form(
 
 def get_vets() -> list:
     # Generate query
-    query = db.session.query(Vet).order_by(Vet.name.desc())
+    query = db.session.query(Vet).order_by(Vet.name.asc())
     vets = query.all()
     logger.debug(f"{vets = }")
     return vets

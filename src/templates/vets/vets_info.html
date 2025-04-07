@@ -1,8 +1,11 @@
 <h2>Showing Vets</h2>
+
+{% if current_user.is_admin %}
 <button class="button button-secondary u-half-width" onclick="exportTableToCsv('Vets')" hx-indicator="#vet-download-spinner">
   Download Vets
   <img id="vet-download-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
 </button>
+{% endif %}
 
 <div id="vets">
   {% with vets=vets %}

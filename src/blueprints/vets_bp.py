@@ -5,6 +5,7 @@ from flask_login import current_user, login_required
 from loguru import logger
 
 from services import vet_service
+from services.auth_service import admin_user_required
 
 
 vets_bp = Blueprint("vets_bp", __name__)
@@ -46,6 +47,7 @@ def get_vet_by_id(vet_id: int):
 
 @vets_bp.route("/add", methods=["GET"])
 @login_required
+@admin_user_required
 def get_vet_form():
     vet_form = vet_service.get_vet_form()
     logger.debug(f"{vet_form = }")
@@ -54,6 +56,7 @@ def get_vet_form():
 
 @vets_bp.route("/<int:vet_id>/edit", methods=["GET"])
 @login_required
+@admin_user_required
 def edit_vet(vet_id: int):
     logger.debug(f"{vet_id = }")
     vet = vet_service.get_vet_by_id(vet_id)
@@ -65,6 +68,7 @@ def edit_vet(vet_id: int):
 
 @vets_bp.route("/<int:vet_id>", methods=["PUT"])
 @login_required
+@admin_user_required
 def update_vet(vet_id: int):
     logger.debug(f"{vet_id = }")
     vet = vet_service.get_vet_by_id(vet_id)
@@ -93,6 +97,7 @@ def update_vet(vet_id: int):
 
 @vets_bp.route("/", methods=["POST"])
 @login_required
+@admin_user_required
 def add_vet():
     # Add new vet
     vet_form = vet_service.get_vet_form()
@@ -117,6 +122,7 @@ def add_vet():
 
 @vets_bp.route("/<int:vet_id>", methods=["DELETE"])
 @login_required
+@admin_user_required
 def delete_vet_by_id(vet_id: int):
     logger.debug(f"{vet_id = }")
     vet_service.delete_vet_by_id(vet_id)

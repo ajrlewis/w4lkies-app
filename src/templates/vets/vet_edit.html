@@ -14,14 +14,16 @@
       {% include "forms/field.html" %}
     {% endwith %}
   </td>
-  <td>
-    <button class="button-edit u-half-width" hx-put="/vets/{{ vet.vet_id }}" hx-include="closest tr" hx-indicator="#vet-save-spinner">
-      Save
-      <img id="vet-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-    </button>
-    <button class="button-delete u-half-width" hx-get="/vets/{{ vet.vet_id }}" hx-indicator="#vet-delete-spinner">
-      Cancel
-      <img id="vet-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-    </button>
-  </td>
+  {% if current_user.is_admin %}
+    <td>
+      <button class="button-edit u-half-width" hx-put="/vets/{{ vet.vet_id }}" hx-include="closest tr" hx-indicator="#vet-save-spinner">
+        Save
+        <img id="vet-save-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+      <button class="button-delete u-half-width" hx-get="/vets/{{ vet.vet_id }}" hx-indicator="#vet-delete-spinner">
+        Cancel
+        <img id="vet-delete-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+      </button>
+    </td>
+  {% endif %}
 </tr>

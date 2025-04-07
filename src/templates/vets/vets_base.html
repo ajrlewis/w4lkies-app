@@ -3,15 +3,17 @@
   <br>
   <div class="row">
     <div class="twelve columns">
-      <button class="button button-primary u-half-width"
-        hx-get="/vets/add"
-        hx-target="#vets-container"
-        hx-swap="innerHTML"
-        hx-indicator="#add-vet-spinner"
-        >
-        Add Vet
-        <img id="add-vet-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
-      </button>
+      {% if current_user.is_admin %}
+        <button class="button button-primary u-half-width"
+          hx-get="/vets/add"
+          hx-target="#vets-container"
+          hx-swap="innerHTML"
+          hx-indicator="#add-vet-spinner"
+          >
+          Add Vet
+          <img id="add-vet-spinner" class="htmx-indicator" src="/static/img/bars.svg"/>
+        </button>
+      {% endif %}
       <button class="button button-primary u-half-width"
         hx-get="/vets/info"
         hx-target="#vets-container"
