@@ -41,7 +41,7 @@ def send(
         recipients = [recipient]
         logger.debug(f"{recipients = }")
         body = html2text.html2text(html)
-        logger.debug(f"{body = }")
+        # logger.debug(f"{body = }")
         message = Message(
             subject,
             sender=sender,
@@ -50,7 +50,7 @@ def send(
             html=html,
             body=body,
         )
-        logger.debug(f"{message = }")
+        # logger.debug(f"{message = }")
         if attachments:
             for attachment in attachments:
                 logger.debug(f"{attachment = }")
