@@ -72,7 +72,6 @@ def get_bookings_info_future():
     if not current_user.is_admin:
         user_id = current_user.user_id
     bookings = booking_service.get_future_bookings(user_id=user_id)
-    bookings = bookings[:max_bookings]
     booking_filter_form = booking_service.get_booking_filter_form()
     logger.debug(f"{bookings = }")
     return render_template(
