@@ -73,9 +73,9 @@
 }
 
 .active {
-/*  background-color: #f2f2f2;*/
-  background-color: var(--background-dark-color);
-  color: var(--text-light-color);
+  background-color: #f2f2f2;
+/*  background-color: var(--background-dark-color);*/
+/*  color: var(--text-light-color);*/
 }
 
 table {
